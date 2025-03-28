@@ -1,0 +1,128 @@
+/* Ensure the container takes full height and centers content */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #fff;
+}
+
+/* Row styling for better alignment */
+.row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Adjust max-width as needed */
+   
+}
+
+/* Logo Styling */
+.col-2 img {
+    width: 200px; /* Small and decent-sized logo */
+    display: block;
+    margin: 0 auto 20px auto; /* Centering the logo */
+    border-radius: 20px;
+}
+
+/* Form Container */
+.form-container {
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Form Toggle Buttons */
+.form-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.form-btn span {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* Indicator Underline */
+#Indicator {
+    width: 100%;
+    height: 3px;
+    background: #ff523b;
+    margin: 15px 0 0 10px;
+   
+}
+
+/* Form Input Fields */
+form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Submit Button */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: #ff523b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #e84118;
+}
+
+/* Forgot Password Link */
+#fp {
+    display: block;
+    margin-top: 10px;
+    color: #555;
+    text-decoration: none;
+    font-size: 12px;
+    
+}
+
+form #fp:hover {
+    color: #ff523b;
+    cursor: pointer;
+}
+
+form #sign:hover {
+    color: #ff523b;
+    cursor: pointer;
+
+}
+form #log:hover {
+    color: #ff523b;
+    cursor: pointer;
+
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .row {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        max-width: 600px;
+    }
+
+    .col-2 {
+        flex: 1;
+        padding: 10px;
+    }
+}
