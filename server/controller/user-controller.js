@@ -48,7 +48,7 @@ export const userLogin = async(req,res) => {
                 ]
             });
 
-                         console.log(user.password);
+                        
 
 
             if(!user){
@@ -73,10 +73,23 @@ export const userLogin = async(req,res) => {
                 const newToken = new Token({token: refreshToken});
                 await newToken.save();
 
-                return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken, name: user.name, username: user.username});
+                return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken, name: user.name, username: user.username, role: user.role});
             }
 
         }catch(error){
             return res.status(500).json({msg:"Error while logging in the user"});
         }
+}
+
+
+export const getUserInfo = async(req,res) => {
+
+    try{
+            const info = await User.findOne({username: req.query.username});
+            
+
+            res.status(200).json(info);
+    }catch(error){
+            res.status(500).json({error: error.message});
+    }
 }

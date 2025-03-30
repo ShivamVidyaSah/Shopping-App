@@ -1,0 +1,45 @@
+.table-container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+    
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+tr{
+    border-radius: 40px;
+}
+
+th, td {
+    padding: 12px;
+    /* border-bottom: 1px solid #ddd; */
+}
+
+th {
+    background: #fef9ea;
+    color: #000;
+    /* border-radius: 40px; */
+}
+
+td {
+    font-size: 16px;
+    border-radius: 40px;
+}
+
+.product-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+}

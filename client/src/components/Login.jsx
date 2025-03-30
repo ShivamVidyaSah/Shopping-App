@@ -12,8 +12,9 @@ const signUpInitialValues = {
       name:'',
       username:'',
       email:'',
-      role:'customer',
-      password:''
+      role:'Customer',
+      password:'',
+      phone:''
 };
 
 const loginInitialValues = {
@@ -75,6 +76,7 @@ const LoginPage = ({isUserAuthenticated}) => {
           sessionStorage.setItem('accessToken' , `Bearer ${response.data.accessToken}`);
           sessionStorage.setItem('refreshToken' , `Bearer ${response.data.refreshToken}`);
           sessionStorage.setItem('userName',`${response.data.username}`);
+          sessionStorage.setItem('role',`${response.data.role}`);
 
           console.log(response.data.name);
 
