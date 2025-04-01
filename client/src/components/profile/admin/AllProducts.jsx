@@ -8,6 +8,10 @@ const AllProducts = () => {
     const [products, setProduct] = useState([]); 
     // we are passing an array cuz we will map over the data
 
+    const [ showWarning, setShowWarning] = useState(false);
+    const [selectedProductID, setSelectedProductId] = useState(null);
+    const [ deleted, setDeleted] = useState(false);
+
     useEffect(()=>{
 
         const getProducts = async() => {
@@ -27,10 +31,30 @@ const AllProducts = () => {
 
 },[])
 
+const confirmDelete = (id) => {
+    setSelectedProductId(id);
+    setShowWarning(true);
+
+}
+
+
+const handleDelete = async() => {
+
+    try{
+    const response = await axios.delete(`http://localhost:4000/deleteproduct/${selectedProductID}`);
+    setProduct(products.filter((product)=> product._id !== selectedProductID));
+    setShowWarning(false);
+    setDeleted(true);
+
+    }catch(error){
+
+    }
+}
+
 
 return (
     <div className="table-container">
-        <h2>All Products</h2>
+        <h2 style={{color:"#ff523b"}}>All Products</h2>
 
         <table>
         <thead>
@@ -39,6 +63,7 @@ return (
                 <th>Name</th>
                 <th>Stock</th>
                 <th>Price</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -48,11 +73,15 @@ return (
                         products.map((product) => (
                             <tr key={product._id}>
                                 <td>
-                                    <img src={product.imageUrl} alt={product.name} className="product-img"/>
+                                    <img src={product.images?.[0]?.url} alt={product.name} className="product-img"/>
                                 </td>
                                 <td>{product.name}</td>
                                 <td>{product.stock}</td>
-                                <td>₹{product.price}</td>
+                                <td>₹{product.finalPrice}</td>
+                                <td>
+                                    <button className="edit-btn" onClick={()=>handleEdit(product._id)}>✏️</button>
+                                    <button className="delete-btn" onClick={()=> confirmDelete(product._id)}>🗑️</button>
+                                </td>
                             </tr>
                         ))
                     ) : (
@@ -61,6 +90,25 @@ return (
                         </tr>
                     )}
         </table>
+
+        {/* Product delete confirmation */}
+        {showWarning && (
+        <div className="popup">
+            <div className="popup-content">
+                    <p>Are you sure you want to delete?</p>
+                    <button className="yes-btn" onClick={handleDelete}>Yes</button>
+                    <button className="no-btn" onClick={()=>setShowWarning(false)}>No</button>
+            </div>
+        </div>
+        )}
+        {deleted && (
+        <div className="deleted">
+            <div className="deleted-content">
+                    <p>Product Deleted.</p>
+                    <button className="ok-btn" onClick={()=>setDeleted(false)}>OK</button>
+            </div>
+        </div>
+        )}
         {/* <ul>
             {product.length > 0 ? (
                 product.map((item) => (

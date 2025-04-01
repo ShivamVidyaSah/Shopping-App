@@ -1,11 +1,18 @@
 import Product from "../model/product.js"
 
 
-
 export const AddProduct = async(req,res) => {
 
     try{
-            const newProduct = new Product(req.body);
+        const imageFiles = req.files.map(file => ({
+            url: `data:image/png;base64,${file.buffer.toString("base64")}`,
+            public_id: file.originalname
+        }));
+
+        const newProduct = new Product({
+            ...req.body,
+            images: imageFiles
+        });
             
             await newProduct.save();
 
@@ -22,5 +29,19 @@ export const getAllProducts = async(req,res) => {
             return res.status(200).json(products);
     }catch(error){
             return res.status(500).json({msg: error.message})
+    }
+}
+
+export const deleteProduct = async(req,res) => {
+
+    try{
+        const deleted = await Product.deleteOne({_id: req.params.id});
+        //in deleteOne param should be passed as an object
+
+        return res.status(200).json({msg:"Product Deleted"})
+
+    }catch(error){
+        return res.status(500).json({error: error.message})
+   
     }
 }

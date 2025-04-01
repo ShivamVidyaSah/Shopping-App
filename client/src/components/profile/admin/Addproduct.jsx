@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import "../../../styles/profile/AddProduct.css";
 import axios from "axios";
 
+const productInitialValues = {
+  name: "",
+  description: "",
+  price: "",
+  discount: "",
+  category: "",
+  brand: "",
+  stock: "",
+  sku: "",
+  tags: "",
+  images: [],
+}
+
 const AddProduct = () => {
-  const [product, setProduct] = useState({
-    name: "",
-    description: "",
-    price: "",
-    discount: "",
-    category: "",
-    brand: "",
-    stock: "",
-    sku: "",
-    tags: "",
-    images: [],
-  });
+  const [product, setProduct] = useState(productInitialValues);
 
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -24,19 +26,34 @@ const AddProduct = () => {
     setProduct({ ...product, images: [...e.target.files] });
   };
 
+  const formData = new FormData();
+
+  Object.keys(product).forEach((key)=> {
+    if(key != 'image'){
+      formData.append(key, product[key]);
+    }
+  })
+
+  product.images.forEach((image) => {
+    formData.append("images", image); 
+});
+
   const handleSubmit = async(e) => {
     e.preventDefault();
 
     try{
 
-    const response = await axios.post('http://localhost:4000/addproduct', product);
+    const response = await axios.post('http://localhost:4000/addproduct', formData , {
+      header : {"Content-Type": "multipart/form-data"}
+    });
 
-    if(response.status==='200'){
-        
+    if(response.status=== 200){
+        console.log("Product added successfully");
+       // setProduct(productInitialValues);
     }
 
     }catch(error){
-
+      console.error("Error uploading product:", error);
     }
     console.log("Product Data:", product);
   };
