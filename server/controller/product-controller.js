@@ -5,9 +5,12 @@ export const AddProduct = async(req,res) => {
 
     try{
         const imageFiles = req.files.map(file => ({
-            url: `data:image/png;base64,${file.buffer.toString("base64")}`,
+            url: `/uploads/${file.filename}`,
             public_id: file.originalname
         }));
+
+        //console.log(req);
+        // const imageFiles = req.files.map(file => `/uploads/${file.filename}`);
 
         const newProduct = new Product({
             ...req.body,

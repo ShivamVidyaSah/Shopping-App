@@ -87,9 +87,34 @@ export const getUserInfo = async(req,res) => {
     try{
             const info = await User.findOne({username: req.query.username});
             
-
             res.status(200).json(info);
     }catch(error){
             res.status(500).json({error: error.message});
+    }
+}
+
+export const updateImg = async(req,res) => {
+
+    try{
+      
+        const imageFile = {
+            url: `/uploads/${req.file.filename}`,
+            public_id: req.file.originalname,
+          };
+
+        const update = await User.findByIdAndUpdate(
+            req.body.userId, 
+            {images: imageFile},
+            {new:true}
+        )
+
+        if (!update) {
+            return res.status(404).json({ msg: "User not found" });
+          }
+      
+          res.status(200).json({ msg: "Profile updated", user: update});
+    }catch(error){
+        console.error("Error updating profile:", error);
+        res.status(500).json({ msg: "Server error" });
     }
 }

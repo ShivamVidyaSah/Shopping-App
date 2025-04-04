@@ -14,6 +14,8 @@ import Router from "../server/routes/routes.js";
 import path from "path";
 
 const app = express();
+app.use("/uploads", express.static("uploads"));
+//this line is important to fetch
 
 import { fileURLToPath } from "url";
 

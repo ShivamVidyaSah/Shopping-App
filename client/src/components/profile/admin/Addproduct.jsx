@@ -29,7 +29,7 @@ const AddProduct = () => {
   const formData = new FormData();
 
   Object.keys(product).forEach((key)=> {
-    if(key != 'image'){
+    if(key != 'images'){
       formData.append(key, product[key]);
     }
   })

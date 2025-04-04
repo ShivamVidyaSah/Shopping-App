@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../styles/profile.css";
-import profilePic from "../../assets/profile-pic.png";
+import profilePicture from "../../assets/profile-pic.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AddProduct from "./admin/Addproduct.jsx";
@@ -16,6 +16,35 @@ const Profile = () => {
 
     const [activeComponent, setActiveComponent] = useState("dashboard");
 
+    const [profilePic, setProfilePic] = useState(null);
+
+    const handleChange = (e) => {
+
+        const file = e.target.files[0];
+        if(file){
+            setProfilePic(file);
+            updateProfilePic(file);
+        }
+
+    }
+
+    const updateProfilePic = async(file) => {
+
+        const formData = new FormData();
+        formData.append("profileimage",file);
+        formData.append("userId", info._id);
+                try{
+                    const response = await axios.patch('http://localhost:4000/updateinfo', formData, {
+                        headers: {'Content-Type': "multipart/form-data"}
+                    })
+
+                    if(response.status === 200){
+                        alert("Profile updated successfully!");
+                    }
+                }catch(error){
+                    console.error("Error updating profile:", error);
+                }
+    }
 
     useEffect (() => {
 
@@ -31,6 +60,8 @@ const Profile = () => {
                 }
 
                 setInfo(response.data);
+                console.log(response.data.images.url);
+               // console.log("This is user info: ", info.username);
                 
 
             }catch(error){
@@ -42,16 +73,16 @@ const Profile = () => {
         getInfo();
     },[username])
     
-    const url =  profilePic;
+    const url =  profilePicture;
 
     return (
         <div className="profile-container">
         <div className="profile-header">
             <div className="profile-pic-container">
                 
-                    <img src= {url} alt="User Profile" className="profile-pic"/>
+                    <img src= {info.images?.url ? `http://localhost:4000${info.images.url}` : url} alt="User Profile" className="profile-pic"/>
             
-                <input type="file" id="change-pic" style={{display:"none"}}/>
+                <input type="file" id="change-pic" style={{display:"none"}} onChange={handleChange} accept="images/*"/>
                 <label className="change-pic-label" htmlFor="change-pic" style={{cursor:"pointer"}}>✏️</label>
             </div>
             <div className="profile-info">

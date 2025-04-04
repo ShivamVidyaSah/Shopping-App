@@ -50,7 +50,7 @@ const Shop = () => {
                         
                         <div className="pro" key={product._id} onClick={()=> toProductPage(product._id)}>
                             {/* Redirecting it to the page where the product will be displayed like a product display page */}
-                            <img src={product.images?.[0]?.url} alt="product-1"/>
+                            <img src={`http://localhost:4000${product.images?.[0]?.url}`} alt="product-1"/>
                             {/* ?. (Optional Chaining) → This ensures that if images is undefined or null, 
                             JavaScript won't throw an error and will just return undefined. */}
                             <div className="des">

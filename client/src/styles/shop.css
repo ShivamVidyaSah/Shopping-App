@@ -64,8 +64,10 @@ body{
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    padding-top: 20px;
+    padding: 40px 80px;
     flex-wrap: wrap;
+    /* padding-left: 20px;
+    padding-right: 20px; */
 }
 #product1 .pro{
     width: 23%;
@@ -95,9 +97,9 @@ body{
     font-size: 12px;
 }
 #product1 .pro .des h5{
-    padding-top: 7px;
+    padding-top: 3px;
     color: #1a1a1a;
-    font-size: 14px;
+    font-size: 18px;
 }
 #product1 .pro .des i{
     font-size: 12px;

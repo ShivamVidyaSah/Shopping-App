@@ -24,7 +24,12 @@ const userSchema = mongoose.Schema({
     },
     phone:{
         type:String
-    }
+    },
+    images: 
+        {
+            url: {type: String, default: ""},
+            public_id: {type: String, default: ""} // If using Cloudinary
+        }
 })
 
 

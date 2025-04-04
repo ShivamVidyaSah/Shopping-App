@@ -20,6 +20,10 @@ const AllProducts = () => {
 
             if(response.status === 200){
                 setProduct(response.data);
+                // products.map((product)=>(
+                //     console.log(product.images[0].url)
+                // ))
+                console.log(products[0]);
             }
 
         }catch(error){
@@ -73,7 +77,7 @@ return (
                         products.map((product) => (
                             <tr key={product._id}>
                                 <td>
-                                    <img src={product.images?.[0]?.url} alt={product.name} className="product-img"/>
+                                    <img src={`http://localhost:4000${product.images?.[0]?.url}`} alt={product.name} className="product-img"/>
                                 </td>
                                 <td>{product.name}</td>
                                 <td>{product.stock}</td>
