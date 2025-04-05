@@ -62,7 +62,7 @@ body{
 }
 #product1 .pro-container{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     gap: 10px;
     padding: 40px 80px;
     flex-wrap: wrap;

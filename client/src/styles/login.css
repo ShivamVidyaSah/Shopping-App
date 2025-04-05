@@ -52,7 +52,7 @@
 
 /* Indicator Underline */
 #Indicator {
-    width: 100%;
+    width: 95%;
     height: 3px;
     background: #ff523b;
     margin: 15px 0 0 10px;
@@ -61,7 +61,7 @@
 
 /* Form Input Fields */
 form input {
-    width: 100%;
+    width: 93%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
