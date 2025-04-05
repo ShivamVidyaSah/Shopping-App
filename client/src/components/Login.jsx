@@ -53,7 +53,7 @@ const LoginPage = ({isUserAuthenticated}) => {
         const response = await axios.post('http://localhost:4000/signup', 
           signUp,
           { headers: { "Content-Type": "application/json" }});
-        console.log("Signup successful:", response.data);
+        // console.log("Signup successful:", response.data);
         setIsRegister(false);
 
 
@@ -70,7 +70,7 @@ const LoginPage = ({isUserAuthenticated}) => {
         const response = await axios.post('http://localhost:4000/login', login,
           { headers: { "Content-Type": "application/json" }}
         );
-        console.log(response);
+        // console.log(response);
         if( response.status===200){
           //setError(' ');
           sessionStorage.setItem('accessToken' , `Bearer ${response.data.accessToken}`);
@@ -78,7 +78,7 @@ const LoginPage = ({isUserAuthenticated}) => {
           sessionStorage.setItem('userName',`${response.data.username}`);
           sessionStorage.setItem('role',`${response.data.role}`);
 
-          console.log(response.data.name);
+          // console.log(response.data.name);
 
 
           setAccount({username: response.data.username, name: response.data.name});

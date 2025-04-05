@@ -1,17 +1,13 @@
  import { BrowserRouter, Route, Routes, Navigate, Outlet } from "react-router-dom";
  import { useState } from "react";
 import Home from "./components/Home.jsx";
-// import About from "./components/About";
-// import Blog from "./components/Blog";
-// import Cart from "./components/Cart";
-// import Contact from "./components/Contact";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-// import Footer from "./components/Footer";
 import "./styles/global.css";
 import DataProvider from "./context/DataProvider.jsx";
 import Shop from "./components/shop/Shop.jsx";
 import Profile from "./components/profile/Profile.jsx";
+import Viewproduct from "./components/product/Viewproduct.jsx"
 
 
  const PrivateRoute = ({isAuthenticated, ...prop}) => {
@@ -54,6 +50,12 @@ function App() {
         <Route path='/profile' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
 
           <Route path='/profile' element={<Profile />}/>{/* This route is the main route */}
+
+        </Route>
+
+        <Route path='/product/:id' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
+
+          <Route path='/product/:id' element={<Viewproduct />}/>{/* This route is the main route */}
 
         </Route>
           {/* <Route path="/about" element={<About />} />

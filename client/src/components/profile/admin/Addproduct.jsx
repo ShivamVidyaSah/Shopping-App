@@ -9,6 +9,7 @@ const productInitialValues = {
   discount: "",
   category: "",
   brand: "",
+  size: "",
   stock: "",
   sku: "",
   tags: "",
@@ -90,6 +91,11 @@ const AddProduct = () => {
         <div className="form-group">
           <label>Brand</label>
           <input type="text" name="brand" value={product.brand} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Size Available( comma seperated )</label>
+          <input type="text" name="size" value={product.size} onChange={handleChange} />
         </div>
 
         <div className="form-group">

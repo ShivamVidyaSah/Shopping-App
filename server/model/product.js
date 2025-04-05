@@ -38,6 +38,9 @@ const productSchema = new mongoose.Schema({
         type: String,
         default: "Generic"
     },
+    size: [{
+        type: String
+    }],
     stock: {
         type: Number,
         required: true,

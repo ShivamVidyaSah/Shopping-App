@@ -1,12 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/shop.css";
 import heroImage from "../../assets/shop-page-banner.jpg";
 import { useState,useEffect } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
+
 
 const Shop = () => {
 
+    const navigate = useNavigate();
+
     const [ products, setProducts] = useState([]);
+
+    const toProductPage = (product) => {
+        navigate(`/product/${product._id}`, {state: {product}}); 
+    }
 
     useEffect(()=>{
     const fetchProduct = async() => {
@@ -14,7 +22,7 @@ const Shop = () => {
                 const response = await axios.get('http://localhost:4000/getallproducts')
     
                 if(response.status === 200){
-                    console.log(response.data);
+                    // console.log(response.data);
                     setProducts(response.data);
                 }
     
@@ -48,7 +56,7 @@ const Shop = () => {
                     {products.length > 0 ? 
                         ( products.map((product)=>(
                         
-                        <div className="pro" key={product._id} onClick={()=> toProductPage(product._id)}>
+                        <div className="pro" key={product._id} onClick={()=> toProductPage(product)}>
                             {/* Redirecting it to the page where the product will be displayed like a product display page */}
                             <img src={`http://localhost:4000${product.images?.[0]?.url}`} alt="product-1"/>
                             {/* ?. (Optional Chaining) → This ensures that if images is undefined or null, 
