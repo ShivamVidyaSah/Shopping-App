@@ -7,10 +7,13 @@ const ProductPage = () => {
 
     // const [product]
 
+    const role = sessionStorage.getItem("role");
+
     const location = useLocation();
     const { product } = location.state || {};
 
     const [ isWishlisted, setIsWishlisted] = useState(false);
+    const [quantity, setQuantity] = useState(1);
 
     const toggleWishlist = () => {
         setIsWishlisted(!isWishlisted);
@@ -21,6 +24,10 @@ const ProductPage = () => {
     }
 
     const handleAddToCart = () => {
+
+    }
+
+    const sendtoEditpage = () => {
 
     }
 
@@ -35,19 +42,33 @@ const ProductPage = () => {
             {/* right side - product details */}
             <div className="product-details-section">
 
+            {/* Only customer are allowed to add to wishlist */}
+           { (role === "Customer")?
             <div className="wishlist-button" onClick={toggleWishlist}>
             {isWishlisted ? "❤️" : "🤍"}
-            </div>
+            </div>: null}
 
                 <h1 className="product-title">{product.name}</h1>
                 <p className="product-description">{product.description}</p>
-                <p className="product-stock">{product.stock}</p>
-                <h2 className="product-price">${product.price}</h2>
+                <p className="product-stock">Stock left:- {product.stock}</p>
+                <p className="product-size-available">{product.size}</p>
+                <div className="quantity-selector">
+                    <button onClick={() => setQuantity(q => Math.max(1,q-1))}>-</button>
+                    <span>{quantity}</span>
+                    <button onClick={() => setQuantity(q => Math.min(product.stock,q+1))}>+</button>
 
+                </div>
+
+                <h2 className="product-price">${product.finalPrice}</h2>
+
+                {(role === "Customer")?
                 <div className="product-buttons">
                     <button className="buy-now-button" onClick={handleBuyNow}>Buy Now</button>
                     <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
-                </div>
+                </div>: 
+                <div className="product-buttons">
+                    <button className="edit-product-button" onClick={sendtoEditpage}>Edit Product</button>
+                </div>}
 
 
             </div>

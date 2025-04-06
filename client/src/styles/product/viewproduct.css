@@ -44,7 +44,7 @@
   .product-price {
     font-size: 1.5rem;
     color: #1e90ff;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   
   .product-buttons {
@@ -53,7 +53,8 @@
   }
   
   .buy-now-button,
-  .add-to-cart-button {
+  .add-to-cart-button,
+  .edit-product-button {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     border: none;
@@ -69,5 +70,11 @@
   .add-to-cart-button {
     background-color: #28a745;
     color: white;
+  }
+
+  .edit-product-button{
+    background-color: rgb(209, 153, 0) ;
+    color: #000;
+    font-weight: 500;
   }
   
