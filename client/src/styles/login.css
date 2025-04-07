@@ -112,6 +112,11 @@ form #log:hover {
 
 }
 
+.error{
+    color: red;
+    font-size:12px;
+}
+
 /* Responsive Design */
 @media (min-width: 768px) {
     .row {

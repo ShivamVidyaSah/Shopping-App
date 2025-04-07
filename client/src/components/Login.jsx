@@ -35,6 +35,7 @@ const LoginPage = ({isUserAuthenticated}) => {
 
   const navigate = useNavigate();
 
+  const [error, setError] = useState("");
 
   const handleLoginChange = (e) => {
        
@@ -59,6 +60,7 @@ const LoginPage = ({isUserAuthenticated}) => {
 
     }catch(error){
       console.error("Signup failed:", error.response?.data || error.message);
+      setError(`Signup failed:${ error.response?.data || error.message}`)
     }
   }
   
@@ -67,19 +69,17 @@ const LoginPage = ({isUserAuthenticated}) => {
   const loginUser = async(e) => {
     e.preventDefault();
     try{
+      setError("");
         const response = await axios.post('http://localhost:4000/login', login,
           { headers: { "Content-Type": "application/json" }}
         );
         // console.log(response);
         if( response.status===200){
-          //setError(' ');
+          setError("");
           sessionStorage.setItem('accessToken' , `Bearer ${response.data.accessToken}`);
           sessionStorage.setItem('refreshToken' , `Bearer ${response.data.refreshToken}`);
           sessionStorage.setItem('userName',`${response.data.username}`);
           sessionStorage.setItem('role',`${response.data.role}`);
-
-          // console.log(response.data.name);
-
 
           setAccount({username: response.data.username, name: response.data.name});
          
@@ -88,9 +88,18 @@ const LoginPage = ({isUserAuthenticated}) => {
           navigate('/');
          
         }
+
+        if(response.status === 400){
+          setError("Invalid Username or Email")
+        }
     }catch(error){
         console.log(error);
+        setError("Login failed: Invalid credentials or server error");
     }
+  }
+
+  const forgetPassword = () => {
+    
   }
 
   
@@ -123,8 +132,9 @@ const LoginPage = ({isUserAuthenticated}) => {
                                 <input type="text" name="usernameEmail" placeholder="Username/Email" onChange={(e)=>handleLoginChange(e)}/>
                                 <input type="password" name="password" placeholder="Password" onChange={(e)=>handleLoginChange(e)}/>
                                 <button type="submit" className="btn" >Login</button>
-                                <a id='fp' href="">Forget Password</a>
-                                <p>Don't have an account?<a id='sign' onClick={()=> setIsRegister(true)}>{reg}</a></p>
+                               { error && <p className="error">{error}</p>}
+                                <a id='forget-password' onClick={()=> forgetPassword()}>Forget Password</a>
+                                <p>Don't have an account?<a id='sign' onClick={()=> {setError("");setIsRegister(true)}}>{reg}</a></p>
                             </form>)
                               :
                            ( <form id="RegForm" onSubmit={signUpUser}>
@@ -133,7 +143,8 @@ const LoginPage = ({isUserAuthenticated}) => {
                                 <input type="email" name="email" placeholder="Email" onChange={(e)=>onValueChange(e)}/>
                                 <input type="password" name="password" placeholder="Password" onChange={(e)=>onValueChange(e)}/>
                                 <button type="submit" className="btn" >Sign Up</button>
-                                <p>Already have an account? <a id='log' onClick={()=> setIsRegister(false)}>{log}</a> </p>
+                                { error && <p className="error">{error}</p>}
+                                <p>Already have an account? <a id='log' onClick={()=> {setError("");setIsRegister(false)} }>{log}</a> </p>
                             </form>)
                           }
                     </div>

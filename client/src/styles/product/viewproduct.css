@@ -47,6 +47,11 @@
     margin-bottom: 1rem;
   }
   
+  .quantity-selector{
+    display: flex;
+    gap: 0.5rem;
+  }
+
   .product-buttons {
     display: flex;
     gap: 1rem;
