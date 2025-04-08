@@ -61,14 +61,26 @@ const ProductPage = () => {
 
                 <h2 className="product-price">${product.finalPrice}</h2>
 
-                {(role === "Customer")?
+                {(product.stock > 0 && role === "Customer")?
                 <div className="product-buttons">
                     <button className="buy-now-button" onClick={handleBuyNow}>Buy Now</button>
                     <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
                 </div>: 
-                <div className="product-buttons">
+                <></>
+               } 
+
+               {(product.stock <= 0 && role !== "Admin")?
+                <div className="display-stock">
+                    <div className="out-of-stock" disabled>Out Of Stock</div>
+                </div>:
+                <></>}
+               
+               {(role === "Admin")?
+               <div className="product-buttons">
                     <button className="edit-product-button" onClick={sendtoEditpage}>Edit Product</button>
-                </div>}
+                </div>: null}
+
+
 
 
             </div>

@@ -8,6 +8,7 @@ import DataProvider from "./context/DataProvider.jsx";
 import Shop from "./components/shop/Shop.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import Viewproduct from "./components/product/Viewproduct.jsx"
+import ForgetPassword from "./components/passwordReset/forgetPassword.jsx";
 
 
  const PrivateRoute = ({isAuthenticated, ...prop}) => {
@@ -33,6 +34,8 @@ function App() {
         <Routes>
 
         <Route path ='/login' element={<Login isUserAuthenticated={isUserAuthenticated}/>} />
+
+        <Route path = '/forget-password' element={<ForgetPassword/>}/>
 
           
         <Route path='/' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >

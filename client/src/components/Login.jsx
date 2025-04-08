@@ -99,7 +99,7 @@ const LoginPage = ({isUserAuthenticated}) => {
   }
 
   const forgetPassword = () => {
-    
+      navigate('/forget-password');
   }
 
   

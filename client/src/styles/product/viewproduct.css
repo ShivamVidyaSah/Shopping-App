@@ -82,4 +82,20 @@
     color: #000;
     font-weight: 500;
   }
+
+  .display-stock{
+    display: flex;
+  }
+
+  .out-of-stock{
+    width: 150px;
+    height: 60px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(209, 216, 216);
+    border-radius: 20px;
+
+  }
   
