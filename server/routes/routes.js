@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-import { getUserInfo, signUpUser, updateImg, userLogin } from "../controller/user-controller.js";
+import { forgetPassword, getUserInfo, signUpUser, updateImg, userLogin } from "../controller/user-controller.js";
 import { AddProduct, deleteProduct, getAllProducts } from "../controller/product-controller.js";
 
 const router = express.Router();
@@ -39,6 +39,8 @@ router.patch('/updateinfo', upload.single("profileimage"), updateImg)
 router.get('/getallproducts', getAllProducts);
 
 router.delete('/deleteproduct/:id', deleteProduct);
+
+router.post('/forgetpassword', forgetPassword );
 
 
 export default router;

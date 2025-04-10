@@ -1,8 +1,12 @@
 import React from "react";
 import "../styles/home.css"
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div>
       {/* Navbar */}
@@ -14,7 +18,7 @@ const Home = () => {
         <h2>Super value deals</h2>
         <h1>On all products</h1>
         <p>Save more with coupons & up to 70% off!</p>
-        <button>Shop Now</button>
+        <button onClick={()=> navigate('/shop')}>Shop Now</button>
       </section>
       
       {/* Featured Products */}

@@ -87,7 +87,7 @@ form input {
 }
 
 /* Forgot Password Link */
-#fp {
+#forget-password {
     display: block;
     margin-top: 10px;
     color: #555;
@@ -96,7 +96,7 @@ form input {
     
 }
 
-form #fp:hover {
+form #forget-password:hover {
     color: #ff523b;
     cursor: pointer;
 }
