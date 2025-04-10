@@ -13,17 +13,35 @@ const forgetPassword = () => {
     const [ statusMessage, setStatusMessage] = useState("");
 
     const handleSubmit = async(e) => {
-        e.preventDefault();
-        setStatusMessage("");
+      e.preventDefault();
+      setStatusMessage("");
 
+      if(!displayOTP) {
+        // send email with otp
         try{
          const repsonse = await axios.post('http://localhost:4000/forgetpassword', {email});
          setStatusMessage('OTP sent to your email.');
-        setDisplayOTP(true);
-        }catch(error){
-            setStatusMessage('Failed to send reset email. Please try again.');
+         setDisplayOTP(true);
 
+        }catch(error){
+            setStatusMessage('Failed to send OTP. Please try again.');
         }
+      }
+        else
+        {
+          //send the otp for verification
+        try{
+          const response = await axios.post('http://localhost:4000/verify-otp', { email, otp });
+          if (response.data.success) {
+          navigate("/reset-password", { state: { email } });
+      } else {
+           setStatusMessage("Invalid OTP. Please try again.");
+          }
+        }catch(error){
+          setStatusMessage("Error verifying OTP. Try again.");
+        }
+
+      }
 
     }
 
@@ -60,7 +78,7 @@ const forgetPassword = () => {
                   {displayOTP ? 
                   <button type="submit" className="OTP-button">Enter OTP</button>
                   :
-                  <button type="submit" className="submit-button">Send Reset Link</button>
+                  <button type="submit" className="submit-button">Verify & Send OTP </button>
                   }
                 </form>
                 {statusMessage && <p className="status-message">{statusMessage}</p>}
