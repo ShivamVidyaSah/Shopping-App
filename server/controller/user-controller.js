@@ -118,3 +118,12 @@ export const updateImg = async(req,res) => {
         res.status(500).json({ msg: "Server error" });
     }
 }
+
+export const forgetPassword = async(req,res) => {
+
+    try{
+       
+    }catch(error){
+
+    }
+}
