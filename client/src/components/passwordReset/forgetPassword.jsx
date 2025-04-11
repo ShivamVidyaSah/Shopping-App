@@ -14,7 +14,7 @@ const forgetPassword = () => {
 
     const handleSubmit = async(e) => {
       e.preventDefault();
-      setStatusMessage("");
+      setStatusMessage(" ");
 
       if(!displayOTP) {
         // send email with otp
@@ -24,7 +24,9 @@ const forgetPassword = () => {
          setDisplayOTP(true);
 
         }catch(error){
-            setStatusMessage('Failed to send OTP. Please try again.');
+            // setStatusMessage('Failed to send OTP. Please try again.');
+            setStatusMessage(error.response.data.msg);
+            // console.log(error.response.data);
         }
       }
         else

@@ -119,11 +119,3 @@ export const updateImg = async(req,res) => {
     }
 }
 
-export const forgetPassword = async(req,res) => {
-
-    try{
-       
-    }catch(error){
-
-    }
-}
