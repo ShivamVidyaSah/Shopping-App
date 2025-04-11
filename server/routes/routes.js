@@ -23,7 +23,7 @@ const upload = multer({ storage });
 
 import {  getUserInfo, signUpUser, updateImg, userLogin } from "../controller/user-controller.js";
 import { AddProduct, deleteProduct, getAllProducts } from "../controller/product-controller.js";
-import { sendOTP } from "../controller/password-controller.js";
+import { sendOTP, verifyOTP } from "../controller/password-controller.js";
 
 const router = express.Router();
 
@@ -42,6 +42,8 @@ router.get('/getallproducts', getAllProducts);
 router.delete('/deleteproduct/:id', deleteProduct);
 
 router.post('/forgetpassword', sendOTP );
+
+router.post('/verify-otp', verifyOTP)
 
 
 export default router;

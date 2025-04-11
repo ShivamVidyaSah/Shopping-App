@@ -11,7 +11,8 @@ const forgetPassword = () => {
     const [ otp, setOTP] = useState("");
     const [displayOTP, setDisplayOTP] = useState(false);
     const [ statusMessage, setStatusMessage] = useState("");
-
+    const [userId, setUserId] = useState("");
+ 
     const handleSubmit = async(e) => {
       e.preventDefault();
       setStatusMessage(" ");
@@ -19,9 +20,12 @@ const forgetPassword = () => {
       if(!displayOTP) {
         // send email with otp
         try{
-         const repsonse = await axios.post('http://localhost:4000/forgetpassword', {email});
+         const response = await axios.post('http://localhost:4000/forgetpassword', {email});
          setStatusMessage('OTP sent to your email.');
          setDisplayOTP(true);
+        //  userId = response.data.userID;
+        setUserId(response.data.userId);
+         console.log(response);
 
         }catch(error){
             // setStatusMessage('Failed to send OTP. Please try again.');
@@ -33,7 +37,7 @@ const forgetPassword = () => {
         {
           //send the otp for verification
         try{
-          const response = await axios.post('http://localhost:4000/verify-otp', { email, otp });
+          const response = await axios.post('http://localhost:4000/verify-otp', { userId , otp });
           if (response.data.success) {
           navigate("/reset-password", { state: { email } });
       } else {
