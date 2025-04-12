@@ -4,6 +4,7 @@ import heroImage from "../../assets/shop-page-banner.jpg";
 import { useState,useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import cart from "../../assets/shopping-bag.png"
 
 
 const Shop = () => {
@@ -73,7 +74,8 @@ const Shop = () => {
                                 </div>
                                 <h4>${product.finalPrice}</h4> {/* add how much discount is getting applied  */}
                             </div>
-                            <Link to="" ><i className="fal fa-shopping-cart cart"></i></Link>
+                          <div className="cart"><img src={cart} className="cart-img" /></div>
+                           {/* <FontAwesomeIcon icon="fa-solid fa-cart-shopping cart" /> */}
                         </div>
                          )) ):(
                             <div>
