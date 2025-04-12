@@ -99,10 +99,10 @@ const LoginPage = ({isUserAuthenticated}) => {
   }
 
   const forgetPassword = () => {
-      navigate('/forget-password');
+      navigate('/forgetpassword');
   }
 
-  
+
   return (
     
     
