@@ -125,6 +125,12 @@ body{
     right: 20px;
 }
 
+.cart-img{
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    padding-top: 5px;
+}
 @media(max-width:799px){
     .section-p1{
         padding: 40px 40px;

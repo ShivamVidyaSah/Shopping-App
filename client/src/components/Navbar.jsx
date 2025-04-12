@@ -2,6 +2,7 @@ import logo from "../assets/logo.png"
 import "../styles/navbar.css"
 import profile from "../assets/profile-user.png"
 import { Link } from "react-router-dom"
+import cart  from "../assets/shopping-bag.png";
 
 
 const Navbar = () => {
@@ -22,8 +23,8 @@ const Navbar = () => {
             <li><Link to="/profile"><img src={profile}
             style={{width: 30, textDecoration: "none"}}/></Link></li>
             { 
-            role === "customer"?
-            <li><Link href="cart.html"><i className="fas fa-shopping-cart cart"></i></Link></li>
+            role === "Customer"?
+            <li><img src={cart}/></li>
             : 
             null}
           </ul>
