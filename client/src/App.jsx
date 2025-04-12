@@ -9,7 +9,6 @@ import Shop from "./components/shop/Shop.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import Viewproduct from "./components/product/Viewproduct.jsx"
 import ForgetPassword from "./components/passwordReset/forgetPassword.jsx";
-import ResetPassword from "./components/passwordReset/resetPassword.jsx"
 
 
  const PrivateRoute = ({isAuthenticated, ...prop}) => {
@@ -36,10 +35,7 @@ function App() {
 
         <Route path ='/login' element={<Login isUserAuthenticated={isUserAuthenticated}/>} />
 
-        <Route path = '/forgetpassword' element={<ForgetPassword/>}/>
-
-        <Route path = '/resetpassword/:userId' element={<ResetPassword/>}/>
-
+        <Route path = '/forget-password' element={<ForgetPassword/>}/>
 
           
         <Route path='/' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >

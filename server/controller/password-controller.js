@@ -2,7 +2,6 @@ import User from "../model/user.js";
 import generateOtp from "../utils/generateOtp.js";
 import OTP from "../model/otp.js"
 import nodemailer from "nodemailer";
-import bcrypt from "bcrypt";
 import dotenv from "dotenv"
 dotenv.config();
 
@@ -64,13 +63,13 @@ export const sendOTP = async(req,res) => {
 
 export const verifyOTP = async(req,res) => {
 
-    const { userId, otp} = req.body;
+    const { userID, otp} = req.body;
 
     try{
              
         const otpEntry = await OTP.findOne({
-            userId: userId,
-            code: otp,
+            userId: userID,
+            code: otp.toString(),
             expiresAt: {$gt: new Date()}
         })
 
@@ -78,41 +77,12 @@ export const verifyOTP = async(req,res) => {
             return res.status(400).json({ success: false, message: "Invalid or expired OTP." });
           }
 
-          await OTP.deleteMany({ userId: userId });
+          await OTP.deleteMany({ userId: userID });
           // deleting the otp after verfication
 
           return res.status(200).json({ success: true, message: "OTP verified." })
     }catch(error){
         console.error(error);
         return res.status(500).json({ success: false, message: "OTP verification failed." });
-    }
-}
-
-export const resetPassword = async(req,res) => {
-
-    try{
-        // console.log(req);
-        const { userId, password } = req.body;
-
-       const user = await User.findById(userId);
-       //finding the user with userId
-
-       console.log(user);
-
-       const salt = await bcrypt.genSalt();
-       const hashedPassword = await bcrypt.hash(password,salt);
-       //hashing the new password
-
-       user.password = hashedPassword;
-
-       await user.save();
-
-       return res.status(200).json({ success: true, message: "Password updated successfully" });
-
-    }catch(error){
-
-        console.error("Error resetting password:", error);
-        return res.status(500).json({ success: false, message: "Server error" });
-
     }
 }

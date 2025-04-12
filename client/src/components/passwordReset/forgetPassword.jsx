@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import "../../styles/passwordReset/forgetPassword.css"
-import { useNavigate } from "react-router-dom";
 // import dotenv from "dotenv";
 // dotenv.config();
 
@@ -13,8 +12,6 @@ const forgetPassword = () => {
     const [displayOTP, setDisplayOTP] = useState(false);
     const [ statusMessage, setStatusMessage] = useState("");
     const [userId, setUserId] = useState("");
-
-    const navigate = useNavigate();
  
     const handleSubmit = async(e) => {
       e.preventDefault();
@@ -40,9 +37,9 @@ const forgetPassword = () => {
         {
           //send the otp for verification
         try{
-          const response = await axios.post('http://localhost:4000/verifyotp', { userId , otp });
+          const response = await axios.post('http://localhost:4000/verify-otp', { userId , otp });
           if (response.data.success) {
-          navigate(`/resetpassword/${userId}`, { state: { email } });
+          navigate("/reset-password", { state: { email } });
       } else {
            setStatusMessage("Invalid OTP. Please try again.");
           }
