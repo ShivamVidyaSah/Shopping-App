@@ -10,6 +10,7 @@ import Profile from "./components/profile/Profile.jsx";
 import Viewproduct from "./components/product/Viewproduct.jsx"
 import ForgetPassword from "./components/passwordReset/forgetPassword.jsx";
 import ResetPassword from "./components/passwordReset/resetPassword.jsx"
+import Cart from "./components/cart/Cart.jsx";
 
 
  const PrivateRoute = ({isAuthenticated, ...prop}) => {
@@ -61,6 +62,13 @@ function App() {
         <Route path='/product/:id' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
 
           <Route path='/product/:id' element={<Viewproduct />}/>{/* This route is the main route */}
+
+        </Route>
+
+
+        <Route path='/cart' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
+
+          <Route path='/cart' element={<Cart />}/>{/* This route is the main route */}
 
         </Route>
           {/* <Route path="/about" element={<About />} />

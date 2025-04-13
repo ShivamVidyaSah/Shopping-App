@@ -3,11 +3,18 @@ import "../styles/navbar.css"
 import profile from "../assets/profile-user.png"
 import { Link } from "react-router-dom"
 import cart  from "../assets/shopping-bag.png";
+import { useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
 
+    const navigate = useNavigate();
+
     const role = sessionStorage.getItem("role");
+
+    const movetoCart = () => {
+        navigate('/cart');
+    }
 
     return (
         <div id="header">
@@ -24,7 +31,7 @@ const Navbar = () => {
             style={{width: 30, textDecoration: "none"}}/></Link></li>
             { 
             role === "Customer"?
-            <li><img src={cart}/></li>
+            <li><img src={cart} onClick={(e) => movetoCart()}/></li>
             : 
             null}
           </ul>

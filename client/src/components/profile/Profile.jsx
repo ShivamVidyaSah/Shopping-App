@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AddProduct from "./admin/Addproduct.jsx";
 import  AllProducts  from "./admin/AllProducts.jsx";
+import Addcoupon from "./admin/Addcoupon.jsx";
 
 
 
@@ -102,6 +103,7 @@ const Profile = () => {
                         <li onClick={() => setActiveComponent("addProduct")}>Add Products</li>
                         <li onClick={() => setActiveComponent("allProducts")}>All Products</li>
                         <li onClick={() => setActiveComponent("messages")}>Messages</li>
+                        <li onClick={() => setActiveComponent("coupon")}>Coupon</li>
                         <li><Link to="/login">Logout</Link></li>
                     </>
                     :
@@ -126,6 +128,7 @@ const Profile = () => {
                         {activeComponent === "addProduct" && <AddProduct />}
                         {activeComponent === "allProducts" && <AllProducts />}
                         {activeComponent === "messages" && <Messages />}
+                        {activeComponent === "coupon" && <Addcoupon/>}
                         {activeComponent === "orders" && <Orders />}
                         {activeComponent === "wishlist" && <Wishlist />}
                         {activeComponent === "chat" && <Chat />}
