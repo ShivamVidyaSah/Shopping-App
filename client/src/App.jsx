@@ -4,7 +4,7 @@ import Home from "./components/Home.jsx";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import "./styles/global.css";
-import DataProvider from "./context/DataProvider.jsx";
+import { CartProvider } from "./context/CartProvider.jsx";
 import Shop from "./components/shop/Shop.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import Viewproduct from "./components/product/Viewproduct.jsx"
@@ -30,7 +30,7 @@ function App() {
   const [isAuthenticated, isUserAuthenticated] = useState(true);
 
   return (
-    <DataProvider>
+    <CartProvider>
       <BrowserRouter>
         {/* <Navbar /> */}
         <Routes>
@@ -79,7 +79,7 @@ function App() {
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
-    </DataProvider>
+    </CartProvider>
   
   );
 }

@@ -3,7 +3,7 @@ import "../styles/login.css";
 import logo2 from "../assets/logo2.png"
 import axios from "axios";
 
-import { DataContext } from "../context/DataProvider.jsx";
+//import { DataContext } from "../context/DataProvider.jsx";
 import {useNavigate} from "react-router-dom";
 
 
