@@ -31,7 +31,7 @@ const LoginPage = ({isUserAuthenticated}) => {
 
   const [signUp, setSignUp] = useState(signUpInitialValues);
 
-  const {setAccount} = useContext(DataContext);
+  //const {setAccount} = useContext(DataContext);
 
   const navigate = useNavigate();
 
@@ -81,7 +81,7 @@ const LoginPage = ({isUserAuthenticated}) => {
           sessionStorage.setItem('userName',`${response.data.username}`);
           sessionStorage.setItem('role',`${response.data.role}`);
 
-          setAccount({username: response.data.username, name: response.data.name});
+          //setAccount({username: response.data.username, name: response.data.name});
          
           isUserAuthenticated(true);
       

@@ -24,6 +24,7 @@ const upload = multer({ storage });
 import {  getUserInfo, signUpUser, updateImg, userLogin } from "../controller/user-controller.js";
 import { AddProduct, deleteProduct, getAllProducts } from "../controller/product-controller.js";
 import { resetPassword, sendOTP, verifyOTP } from "../controller/password-controller.js";
+import { CreateCoupon } from "../controller/coupon-controller.js";
 
 const router = express.Router();
 
@@ -45,7 +46,9 @@ router.post('/forgetpassword', sendOTP );
 
 router.post('/verifyotp', verifyOTP);
 
-router.put('/resetuserpassword', resetPassword)
+router.put('/resetuserpassword', resetPassword);
+
+router.post('/createcoupon', CreateCoupon)
 
 
 export default router;
