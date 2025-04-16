@@ -31,7 +31,11 @@ const LoginPage = ({isUserAuthenticated}) => {
 
   const [signUp, setSignUp] = useState(signUpInitialValues);
 
+<<<<<<< HEAD
   // const {setAccount} = useContext(DataContext);
+=======
+  //const {setAccount} = useContext(DataContext);
+>>>>>>> ccc161aa2256de3579f4fb7ddc8172bbf1416d9a
 
   const navigate = useNavigate();
 
@@ -81,7 +85,11 @@ const LoginPage = ({isUserAuthenticated}) => {
           sessionStorage.setItem('userName',`${response.data.username}`);
           sessionStorage.setItem('role',`${response.data.role}`);
 
+<<<<<<< HEAD
          // setAccount({username: response.data.username, name: response.data.name});
+=======
+          //setAccount({username: response.data.username, name: response.data.name});
+>>>>>>> ccc161aa2256de3579f4fb7ddc8172bbf1416d9a
          
           isUserAuthenticated(true);
       
