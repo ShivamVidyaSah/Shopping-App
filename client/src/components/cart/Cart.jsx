@@ -1,10 +1,17 @@
 import React from 'react';
+import { useCart } from '../../context/CartProvider';
+import "../../styles/cart/cart.css"
 
-const Cart = ({ cartItems, handleRemove, handleQuantityChange }) => {
-//   const totalPrice = cartItems.reduce(
-//     (acc, item) => acc + item.price * item.quantity,
-//     0
-//   );
+const Cart = () => {
+
+  const { cartItems, removeFromCart, updateQuantity } = useCart();
+
+  console.log(cartItems);
+
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + item[0].finalprice * item.quantity,
+    0
+  );
 
   return (
     <div className="cart-container">
@@ -15,10 +22,11 @@ const Cart = ({ cartItems, handleRemove, handleQuantityChange }) => {
         <div className="cart-items">
           {cartItems.map((item) => (
             <div className="cart-item" key={item._id}>
-              <img src={item.image} alt={item.name} className="cart-img" />
+              <img src={item[0].images?.[0]?.url} alt={item.name} className="cart-page-img" />
               <div className="cart-info">
-                <h4 className="cart-name">{item.name}</h4>
-                <p className="cart-price">₹{item.price}</p>
+                <h4 className="cart-name">{item[0].name}</h4>
+                {console.log(item[0].name)}
+                <p className="cart-price">₹{item[0].price}</p>
                 <input
                   type="number"
                   className="cart-qty"
@@ -30,7 +38,7 @@ const Cart = ({ cartItems, handleRemove, handleQuantityChange }) => {
                 />
                 <button
                   className="cart-remove"
-                  onClick={() => handleRemove(item._id)}
+                  onClick={() => removeFromCart(item._id)}
                 >
                   Remove
                 </button>

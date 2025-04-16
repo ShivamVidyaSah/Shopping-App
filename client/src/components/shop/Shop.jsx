@@ -5,11 +5,14 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import cart from "../../assets/shopping-bag.png"
+import { useCart } from "../../context/CartProvider";
 
 
 const Shop = () => {
 
     const navigate = useNavigate();
+
+    const { addToCart } = useCart(); // ✅ destructure the addToCart method
 
     const [ products, setProducts] = useState([]);
 
@@ -36,6 +39,14 @@ const Shop = () => {
     fetchProduct();
     
     },[])
+
+    const AddToCart = (e) => {
+        e.stopPropagation(); //🛑 Prevents it from triggering the product detail navigation
+        addToCart({
+          ...products,
+          image: `http://localhost:4000${products.images?.[0]?.url}`, // ✅ include image separately
+        });
+    }
 
     return (
        
@@ -74,8 +85,11 @@ const Shop = () => {
                                 </div>
                                 <h4>${product.finalPrice}</h4> {/* add how much discount is getting applied  */}
                             </div>
-                          <div className="cart"><img src={cart} className="cart-img" /></div>
+                          <div className="cart" onClick={(e)=> AddToCart(e)}>
+                            <img src={cart} className="cart-img"  />
+                            </div>
                            {/* <FontAwesomeIcon icon="fa-solid fa-cart-shopping cart" /> */}
+                           {/* when i click on the add to cart, this will trigger the addToCart in cart provider */}
                         </div>
                          )) ):(
                             <div>
