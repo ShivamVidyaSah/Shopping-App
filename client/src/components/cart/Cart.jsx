@@ -9,8 +9,8 @@ const Cart = () => {
   console.log(cartItems);
 
   const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item[0].finalprice * item.quantity,
-    0
+    (acc, item) => acc + item[0].finalPrice * item[0].quantity,
+    
   );
 
   return (
@@ -21,39 +21,40 @@ const Cart = () => {
       ) : (
         <div className="cart-items">
           {cartItems.map((item) => (
+            
             <div className="cart-item" key={item._id}>
               <img src={item[0].images?.[0]?.url} alt={item.name} className="cart-page-img" />
               <div className="cart-info">
                 <h4 className="cart-name">{item[0].name}</h4>
-                {console.log(item[0].name)}
+                {/* {console.log(item[0]._id)} */}
                 <p className="cart-price">₹{item[0].price}</p>
                 <input
                   type="number"
                   className="cart-qty"
-                  value={item.quantity}
+                  value={item[0].quantity}
                   min={1}
                   onChange={(e) =>
-                    handleQuantityChange(item._id, parseInt(e.target.value))
+                    updateQuantity(item._id, parseInt(e.target.value))
                   }
                 />
                 <button
                   className="cart-remove"
-                  onClick={() => removeFromCart(item._id)}
+                  onClick={() => removeFromCart(item[0]._id)}
                 >
                   Remove
                 </button>
               </div>
             </div>
-          ))}
+      ))}
         </div>
       )}
 
-      {cartItems.length > 0 && (
+      {/* {cartItems.length > 0 && (
         <div className="cart-summary">
           <h3>Total: ₹{totalPrice}</h3>
           <button className="cart-checkout">Proceed to Checkout</button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

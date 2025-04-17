@@ -17,15 +17,15 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({children}) => {
 
     const [cartItems, setCartItems] = useState(()=>{
-        let storedCart;
+        //let storedCart;
         try{
-        const cartData = localStorage.getItem('cart');
+        const storedCart = localStorage.getItem('cart');
         //It tries to read localStorage to see if the cart already has items saved from before
         return storedCart ? JSON.parse(storedCart): [];
         //If yes → loads them. If no → starts with an empty cart ([]).
         }catch (error) {
             console.error("Failed to parse cart from localStorage:", error);
-            storedCart = [];
+           // storedCart = [];
         }
     })
 

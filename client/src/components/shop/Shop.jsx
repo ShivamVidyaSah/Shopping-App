@@ -44,7 +44,6 @@ const Shop = () => {
         e.stopPropagation(); //🛑 Prevents it from triggering the product detail navigation
         addToCart({
           ...products,
-          image: `http://localhost:4000${products.images?.[0]?.url}`, // ✅ include image separately
         });
     }
 
