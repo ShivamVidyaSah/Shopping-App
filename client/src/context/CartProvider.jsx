@@ -58,6 +58,7 @@ export const CartProvider = ({children}) => {
                 finalPrice: item.finalPrice,
                 quantity: 1,
                 image: item.images?.[0]?.url || "", // use the first image if available
+                discount: item.discount,
             };
 
             setCartItems([...cartItems, newItems]);
