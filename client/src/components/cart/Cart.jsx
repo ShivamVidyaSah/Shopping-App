@@ -9,7 +9,7 @@ const Cart = () => {
   console.log(cartItems);
 
   const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.finalPrice * item.quantity,
+    (acc, item) => Math.ceil(acc + item.finalPrice * item.quantity),
     0
   );
 
@@ -23,7 +23,7 @@ const Cart = () => {
           {cartItems.map((item) => (
             
             <div className="cart-item" key={item._id}>
-              <img src={item.image} alt={item.name} className="cart-page-img" />
+              <img src={item.image ? `http://localhost:4000${item.image}` : null} alt={item.name} className="cart-page-img" />
               <div className="cart-info">
                 <h4 className="cart-name">{item.name}</h4>
                 {/* {console.log(item[0]._id)} */}
