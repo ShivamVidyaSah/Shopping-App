@@ -25,7 +25,7 @@ export const CartProvider = ({children}) => {
         //If yes → loads them. If no → starts with an empty cart ([]).
         }catch (error) {
             console.error("Failed to parse cart from localStorage:", error);
-           // storedCart = [];
+           //storedCart = [];
         }
     })
 
@@ -50,7 +50,17 @@ export const CartProvider = ({children}) => {
                 //Then overwrite quantity with i.quantity + 1
             )
         } else {
-            setCartItems([...cartItems, { ...item, quantity: 1 }]);
+
+            const newItems = {
+                _id: item._id,
+                name: item.name,
+                price: item.price,
+                finalPrice: item.finalPrice,
+                quantity: 1,
+                image: item.images?.[0]?.url || "", // use the first image if available
+            };
+
+            setCartItems([...cartItems, newItems]);
             //...cartItems keeps all the existing items.
             //{ ...item, quantity: 1 }:
             //Copies all properties of the new item.
@@ -66,7 +76,7 @@ export const CartProvider = ({children}) => {
     //function to update the quantity of the product
     const updateQuantity = (id, qty) => {
         setCartItems(
-            cartItems.find((item) =>
+            cartItems.map((item) =>
             item._id === id?{...item, quantity:qty}: item)
         );
     };

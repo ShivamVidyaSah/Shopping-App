@@ -9,8 +9,8 @@ const Cart = () => {
   console.log(cartItems);
 
   const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item[0].finalPrice * item[0].quantity,
-    
+    (acc, item) => acc + item.finalPrice * item.quantity,
+    0
   );
 
   return (
@@ -23,15 +23,15 @@ const Cart = () => {
           {cartItems.map((item) => (
             
             <div className="cart-item" key={item._id}>
-              <img src={item[0].images?.[0]?.url} alt={item.name} className="cart-page-img" />
+              <img src={item.image} alt={item.name} className="cart-page-img" />
               <div className="cart-info">
-                <h4 className="cart-name">{item[0].name}</h4>
+                <h4 className="cart-name">{item.name}</h4>
                 {/* {console.log(item[0]._id)} */}
-                <p className="cart-price">₹{item[0].price}</p>
+                <p className="cart-price">₹{item.price}</p>
                 <input
                   type="number"
                   className="cart-qty"
-                  value={item[0].quantity}
+                  value={item.quantity}
                   min={1}
                   onChange={(e) =>
                     updateQuantity(item._id, parseInt(e.target.value))
@@ -39,7 +39,7 @@ const Cart = () => {
                 />
                 <button
                   className="cart-remove"
-                  onClick={() => removeFromCart(item[0]._id)}
+                  onClick={() => removeFromCart(item._id)}
                 >
                   Remove
                 </button>
@@ -49,12 +49,12 @@ const Cart = () => {
         </div>
       )}
 
-      {/* {cartItems.length > 0 && (
+      {cartItems.length > 0 && (
         <div className="cart-summary">
           <h3>Total: ₹{totalPrice}</h3>
           <button className="cart-checkout">Proceed to Checkout</button>
         </div>
-      )} */}
+      )}
     </div>
   );
 };

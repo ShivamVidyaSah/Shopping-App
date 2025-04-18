@@ -40,12 +40,16 @@ const Shop = () => {
     
     },[])
 
-    const AddToCart = (e) => {
+    const AddToCart = (e,id) => {
         e.stopPropagation(); //🛑 Prevents it from triggering the product detail navigation
-        addToCart({
-          ...products,
-        });
+        
+        products.map((product) => {
+            product._id === id ? addToCart(product) : null;
+        })
+        
     }
+
+    
 
     return (
        
@@ -84,7 +88,7 @@ const Shop = () => {
                                 </div>
                                 <h4>${product.finalPrice}</h4> {/* add how much discount is getting applied  */}
                             </div>
-                          <div className="cart" onClick={(e)=> AddToCart(e)}>
+                          <div className="cart" onClick={(e)=> AddToCart(e,product._id)}>
                             <img src={cart} className="cart-img"  />
                             </div>
                            {/* <FontAwesomeIcon icon="fa-solid fa-cart-shopping cart" /> */}
