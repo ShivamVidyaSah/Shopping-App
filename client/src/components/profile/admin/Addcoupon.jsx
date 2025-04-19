@@ -6,7 +6,7 @@ const couponIntitialValues = {
   code:"",
   discount:"",
   expiryDate:"",
-  usageNumber:"",
+  usageNumber:0,
 }
 
 const AddCoupon = () => {
@@ -19,15 +19,26 @@ const AddCoupon = () => {
     e.preventDefault();
 
     // You can replace this with your API call
-    console.log('Coupon:', coupon);
+    const payload = {
+      ...coupon,
+      discount: Number(coupon.discount),
+      usageNumber: Number(coupon.usageNumber),
+    };
+  
 
     try{
-    const response = axios.post("http://localhost:4000/createcoupon",coupon);
+    const response = await axios.post("http://localhost:4000/createcoupon", payload);
+
+      setMessage("Coupon created successfully");
 
     }catch(error){
-      
+      if (error.response && error.response.status === 409) {
+        setMessage("Coupon already exists");
+      } else {
+        setMessage("Something went wrong");
+      }
     }
-    setMessage('Coupon created successfully!');
+   
     
   };
 
@@ -80,7 +91,12 @@ const AddCoupon = () => {
         />
 
         <button type="submit" className="coupon-btn" >Create Coupon</button>
-        {message && <p className="coupon-msg">{message}</p>}
+        { message === "Coupon already exists" ? (
+         <p className="coupon-msg" style={{color: '#FF0000'}}>{message}</p>
+        ) : (
+          <p className="coupon-msg">{message}</p>
+        )
+        }
       </form>
     </div>
   );

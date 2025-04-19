@@ -6,15 +6,19 @@ export const CreateCoupon = async(req,res) => {
     try{
 
         //checking whether a coupon of same code exist
-        const couponExist = Coupon.findOne(req.body.code);
-        if(couponExist){
-            console.log("Coupon Exist");
-            return res.status(401).json({msg:"Coupon exist"});
+        const couponExist = await Coupon.find({code: req.body.code});
+        
+        if(couponExist.length > 0){
+           
+            return res.status(409).json({msg:"Coupon exist"});
         }else{
+
+            const newCoupon = new Coupon(req.body);
+            await newCoupon.save();
             return res.status(200).json({msg:"Coupon created"})
         }
 
     }catch(error){
-        return res.status(4500).json({msg:"Server Error"});
+        return res.status(500).json({msg:"Server Error"});
     }
 }

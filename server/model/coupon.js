@@ -6,11 +6,11 @@ const couponSchema = mongoose.Schema({
         required: true
     },
     discount:{
-        type:String,
+        type:Number,
         required: true
     },
-    useageNumber:{
-        type:String,
+    usageNumber:{
+        type:Number,
         default: 200000
     },
     expiryDate:{
