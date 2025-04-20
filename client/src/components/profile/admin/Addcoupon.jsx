@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../../../styles/coupon/AddCoupon.css';
 import axios from "axios";
+import AllCoupons from './AllCoupon';
 
 const couponIntitialValues = {
   code:"",
@@ -9,11 +10,12 @@ const couponIntitialValues = {
   usageNumber:0,
 }
 
-const AddCoupon = () => {
+const AddCoupon = ({onBack}) => {
   // const [code, setCode] = useState('');
   // const [discount, setDiscount] = useState('');
   const [coupon, setCoupon ] = useState(couponIntitialValues);
   const [message, setMessage] = useState('');
+  const [ displayAddCoupon, setDisplayAddCoupon] = useState(false);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -43,62 +45,69 @@ const AddCoupon = () => {
   };
 
   return (
-    <div className="coupon-container">
-      <h2 className="coupon-title">Add Coupon</h2>
-      <form className="coupon-form" onSubmit={handleSubmit}>
-        <label className="coupon-label">Coupon Code</label>
-        <input
-        name="code"
-          type="text"
-          value={coupon.code}
-          onChange={(e) => setCoupon((prev) => ({...prev,[e.target.name]:e.target.value}))}
-          placeholder="Enter code"
-          className="coupon-input"
-          required
-        />
+   
+          <div className="coupon-container">
+            <div className='coupon-header'>
+              <h2 className="coupon-title">Add Coupon</h2>
+              <span className='to-all-coupon'>
+                <button className='back-btn' onClick={onBack}>Back</button>
+              </span>
+            </div>
+            <form className="coupon-form" onSubmit={handleSubmit}>
+              <label className="coupon-label">Coupon Code</label>
+              <input
+              name="code"
+                type="text"
+                value={coupon.code}
+                onChange={(e) => setCoupon((prev) => ({...prev,[e.target.name]:e.target.value}))}
+                placeholder="Enter code"
+                className="coupon-input"
+                required
+              />
 
-        <label className="coupon-label">Discount (%)</label>
-        <input
-        name="discount"
-          type="number"
-          value={coupon.discount}
-          onChange={(e) => setCoupon((prev) => ({...prev,[e.target.name]:e.target.value}))}
-          placeholder="Enter discount"
-          className="coupon-input"
-          required
-        />
+              <label className="coupon-label">Discount (%)</label>
+              <input
+              name="discount"
+                type="number"
+                value={coupon.discount}
+                onChange={(e) => setCoupon((prev) => ({...prev,[e.target.name]:e.target.value}))}
+                placeholder="Enter discount"
+                className="coupon-input"
+                required
+              />
 
-        <label className="coupon-label">Number of Use</label>
-        <input
-        name="usageNumber"
-          type="number"
-          value={coupon.usageNumber}
-          onChange={(e) => setCoupon((prev) => ({...prev,[e.target.name]:e.target.value}))}
-          placeholder="Enter Usage limit"
-          className="coupon-input"
-          required
-        />
+              <label className="coupon-label">Number of Use</label>
+              <input
+              name="usageNumber"
+                type="number"
+                value={coupon.usageNumber}
+                onChange={(e) => setCoupon((prev) => ({...prev,[e.target.name]:e.target.value}))}
+                placeholder="Enter Usage limit"
+                className="coupon-input"
+                required
+              />
 
-        <label className="coupon-label">Enter Expiry Date</label>
-        <input
-        name="expiryDate"
-          type="date"
-          value={coupon.expiryDate}
-          onChange={(e) => setCoupon((prev) => ({...prev,[e.target.name]:e.target.value}))}
-          placeholder="Enter Usage limit"
-          className="coupon-input"
-          required
-        />
+              <label className="coupon-label">Enter Expiry Date</label>
+              <input
+              name="expiryDate"
+                type="date"
+                value={coupon.expiryDate}
+                onChange={(e) => setCoupon((prev) => ({...prev,[e.target.name]:e.target.value}))}
+                placeholder="Enter Usage limit"
+                className="coupon-input"
+                required
+              />
 
-        <button type="submit" className="coupon-btn" >Create Coupon</button>
-        { message === "Coupon already exists" ? (
-         <p className="coupon-msg" style={{color: '#FF0000'}}>{message}</p>
-        ) : (
-          <p className="coupon-msg">{message}</p>
-        )
-        }
-      </form>
-    </div>
+              <button type="submit" className="coupon-btn" >Create Coupon</button>
+              { message === "Coupon already exists" ? (
+              <p className="coupon-msg" style={{color: '#FF0000'}}>{message}</p>
+              ) : (
+                <p className="coupon-msg">{message}</p>
+              )
+              }
+            </form>
+          </div>
+     
   );
 };
 
