@@ -37,3 +37,14 @@ export const getAllCoupons = async(req,res) => {
             return res.status(500).json({msg: "Server error"});
     }
 }
+
+export const deleteCoupon = async(req,res) => {
+
+    try{
+        const couponDeleted = await Coupon.deleteOne({_id: req.params.id});
+
+        return res.status(200).json({msg: "Coupon deleted"});
+    }catch(error){
+        return res.status(500).json({msg:"Server error"});
+    }
+}

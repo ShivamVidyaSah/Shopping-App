@@ -23,12 +23,14 @@ const AllCoupons = () => {
     }, []);
   
     const deleteCoupon = async (id) => {
-    //   try {
-    //     await axios.delete(`http://localhost:4000/deletecoupon/${id}`);
-    //     setAllCoupons(allCoupons.filter(coupon => coupon._id !== id));
-    //   } catch (error) {
-    //     console.log("Failed to delete coupon", error);
-    //   }
+        try{
+            const response = await axios.delete(`http://localhost:4000/deletecoupon/${id}`);
+            if(response.status === 200){
+              setAllCoupons(allCoupons.filter(coupon => coupon._id != id))
+            }
+        }catch(error){
+          console.log(error.message);
+        }
     };
   
     if (displayAddCoupon) return <AddCoupon onBack={() => setDisplayAddCoupon(false)} />;

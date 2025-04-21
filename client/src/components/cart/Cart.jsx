@@ -6,8 +6,6 @@ const Cart = () => {
 
   const { cartItems, removeFromCart, updateQuantity } = useCart();
 
-  //console.log(cartItems);
-
   const totalPrice = cartItems.reduce(
     (acc, item) => Math.ceil(acc + item.finalPrice * item.quantity),
     0
