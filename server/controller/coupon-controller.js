@@ -52,8 +52,34 @@ export const deleteCoupon = async(req,res) => {
 export const verifyCoupon = async(req,res) => {
 
     try{
+        // console.log(req.query.couponcode)/\;
+        const isCoupon = await Coupon.findOne({code: req.query.couponcode});
+
+        // {
+        //     _id: new ObjectId('6806774926e7e940e143e9f2'),
+        //     code: 'happy1',
+        //     discount: 10,
+        //     usageNumber: 3,
+        //     expiryDate: 2025-04-25T00:00:00.000Z,
+        //     __v: 0
+        //   }
+
+        if (!isCoupon) {
+            return res.status(404).json({ msg: "Coupon not found" });
+          }
+
+        if(isCoupon.usageNumber === 0){
+            return res.status(400).json({msg:"Invalid Coupon"});
+        }
+            await Coupon.updateOne(
+                { _id : isCoupon._id},
+                {$set: {usageNumber: isCoupon.usageNumber-1}}
+            );
+            return res.status(200).json({ discount: isCoupon.discount });
+        
 
     }catch(error){
-        
+        console.error(error);
+        return res.status(500).json({ msg: "Something went wrong" });
     }
 }

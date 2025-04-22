@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../../context/CartProvider';
 import "../../styles/cart/cart.css"
+import axios from 'axios';
 
 const Cart = () => {
 
@@ -9,21 +10,34 @@ const Cart = () => {
   const [coupon , setCoupon] = useState( {couponcode: ''}); // for storing code
   const [couponMessage, setCouponMessage] = useState(""); // for the message
 
-  const totalPrice = cartItems.reduce(
+  
+  const verifyCoupon = async() => {
+   
+      try{
+          const response = await axios.get('http://localhost:4000/verifycoupon', {params: coupon});
+          
+          if(response.status === 200){
+            console.log(response);
+            setCouponMessage("Coupon Applied");
+            setApplyCoupon(response.data.discount)
+          }else{
+            setCouponMessage("Invalid Coupon");
+          }
+          
+      }catch(error){
+          console.log(error.message);
+      }
+  } 
+
+  var totalPrice = cartItems.reduce(
     (acc, item) => Math.ceil(
-      (acc + item.finalPrice * item.quantity) - appliedCoupon),
+      (acc + item.finalPrice * item.quantity)),
     0
   );
 
+  totalPrice = totalPrice - ((totalPrice * appliedCoupon)/100);
 
-  const verifyCoupon = async() => {
-      try{
-          const response = await axios.get('http://localhost:4000/verifycoupon', coupon);
-          
-      }catch(error){
-
-      }
-  } 
+  // console.log(totalPrice - appliedCoupon);
 
   return (
     <div className="cart-container">
