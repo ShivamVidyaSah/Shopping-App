@@ -20,7 +20,7 @@ const AllCoupons = () => {
         }
       };
       getAllCoupons();
-    }, []);
+    }, [displayAddCoupon]);
   
     const deleteCoupon = async (id) => {
         try{
@@ -33,6 +33,9 @@ const AllCoupons = () => {
         }
     };
   
+    //if displayaddcoupon is true, we are displaying the AddCoupon component,
+    //and passing a prop to add coupon component, upon clicking the back button, this prop 
+    // will update the value of setDisplayAddCoupon
     if (displayAddCoupon) return <AddCoupon onBack={() => setDisplayAddCoupon(false)} />;
   
     return (

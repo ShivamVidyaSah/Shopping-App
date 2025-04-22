@@ -11,11 +11,9 @@ const couponIntitialValues = {
 }
 
 const AddCoupon = ({onBack}) => {
-  // const [code, setCode] = useState('');
-  // const [discount, setDiscount] = useState('');
+  
   const [coupon, setCoupon ] = useState(couponIntitialValues);
   const [message, setMessage] = useState('');
-  const [ displayAddCoupon, setDisplayAddCoupon] = useState(false);
 
   const handleSubmit = async(e) => {
     e.preventDefault();

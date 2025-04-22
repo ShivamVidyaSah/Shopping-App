@@ -48,3 +48,12 @@ export const deleteCoupon = async(req,res) => {
         return res.status(500).json({msg:"Server error"});
     }
 }
+
+export const verifyCoupon = async(req,res) => {
+
+    try{
+
+    }catch(error){
+        
+    }
+}

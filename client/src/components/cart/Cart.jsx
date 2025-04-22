@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from '../../context/CartProvider';
 import "../../styles/cart/cart.css"
 
 const Cart = () => {
 
   const { cartItems, removeFromCart, updateQuantity } = useCart();
+  const [appliedCoupon, setApplyCoupon] = useState(0); // for storing discount
+  const [coupon , setCoupon] = useState( {couponcode: ''}); // for storing code
+  const [couponMessage, setCouponMessage] = useState(""); // for the message
 
   const totalPrice = cartItems.reduce(
-    (acc, item) => Math.ceil(acc + item.finalPrice * item.quantity),
+    (acc, item) => Math.ceil(
+      (acc + item.finalPrice * item.quantity) - appliedCoupon),
     0
   );
+
+
+  const verifyCoupon = async() => {
+      try{
+          const response = await axios.get('http://localhost:4000/verifycoupon', coupon);
+          
+      }catch(error){
+
+      }
+  } 
 
   return (
     <div className="cart-container">
@@ -52,6 +66,26 @@ const Cart = () => {
             </div>
         </>
       )}
+
+      <div className='add-coupon'>
+      <label className='coupon-label'>Add Coupon</label>
+          <div className='coupon-enter'>
+            <input 
+              type='text'
+              name='couponcode'
+              placeholder='Enter Coupon Code'
+              value={coupon.couponcode}
+              onChange={(e) => setCoupon(prev => ({ [ e.target.name]: e.target.value}))} 
+              />
+              <span className='coupon-apply' onClick={() => verifyCoupon()}>Apply</span>
+          </div>
+          { couponMessage === "Invalid Coupon" ? (
+              <p className="coupon-msg" style={{color: '#FF0000'}}>{couponMessage}</p>
+              ) : (
+                <p className="coupon-msg">{couponMessage}</p>
+              )
+              }
+      </div>
 
       {cartItems.length > 0 && (
         <div className="cart-summary">
