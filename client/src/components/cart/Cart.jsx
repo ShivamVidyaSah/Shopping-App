@@ -89,9 +89,15 @@ const Cart = () => {
               name='couponcode'
               placeholder='Enter Coupon Code'
               value={coupon.couponcode}
-              onChange={(e) => setCoupon(prev => ({ [ e.target.name]: e.target.value}))} 
+              onChange={(e) =>{ 
+                setCoupon(null); // Reset if user types something new
+                setApplyCoupon(0); // Reset discount too
+                setCoupon(prev => ({ [ e.target.name]: e.target.value}));
+              } }
               />
+              { !appliedCoupon && coupon.couponcode.trim() && (
               <span className='coupon-apply' onClick={() => verifyCoupon()}>Apply</span>
+              )}
           </div>
           { couponMessage === "Invalid Coupon" ? (
               <p className="coupon-msg" style={{color: '#FF0000'}}>{couponMessage}</p>
@@ -103,6 +109,7 @@ const Cart = () => {
 
       {cartItems.length > 0 && (
         <div className="cart-summary">
+          <h4>Discount: {appliedCoupon}%</h4>
           <h3>Total: ₹{totalPrice}</h3>
           <button className="cart-checkout">Proceed to Checkout</button>
         </div>

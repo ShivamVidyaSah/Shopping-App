@@ -74,7 +74,7 @@ export const verifyCoupon = async(req,res) => {
             await Coupon.updateOne(
                 { _id : isCoupon._id},
                 {$set: {usageNumber: isCoupon.usageNumber-1}}
-            );
+            ); // later remove this to when the order is complete or else this will remain as a bug
             return res.status(200).json({ discount: isCoupon.discount });
         
 

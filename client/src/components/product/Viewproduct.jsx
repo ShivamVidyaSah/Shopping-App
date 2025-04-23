@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../styles/product/viewproduct.css"
 import { useLocation } from "react-router-dom";
+import { useCart } from "../../context/CartProvider";
 
 
 const ProductPage = () => {
@@ -14,6 +15,10 @@ const ProductPage = () => {
 
     const [ isWishlisted, setIsWishlisted] = useState(false);
     const [quantity, setQuantity] = useState(1);
+    const [added, setAdded] = useState(false);
+
+    const { addToCart } = useCart();
+    
 
     const toggleWishlist = () => {
         setIsWishlisted(!isWishlisted);
@@ -24,12 +29,19 @@ const ProductPage = () => {
     }
 
     const handleAddToCart = () => {
-
+            addToCart(product);
+            setAdded(true);
     }
 
     const sendtoEditpage = () => {
 
     }
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setAdded(false), 3000);
+        return () => clearTimeout(timeout);
+      }, [added]);
+      
 
     return (
         <div className="product-page-container">
@@ -64,7 +76,11 @@ const ProductPage = () => {
                 {(product.stock > 0 && role === "Customer")?
                 <div className="product-buttons">
                     <button className="buy-now-button" onClick={handleBuyNow}>Buy Now</button>
+                    {added ? 
+                    <button className="add-to-cart-button" >Added</button>
+                        :
                     <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
+                    }
                 </div>: 
                 <></>
                } 
