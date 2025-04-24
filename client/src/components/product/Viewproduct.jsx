@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../../styles/product/viewproduct.css"
 import { useLocation } from "react-router-dom";
-import { useCart } from "../../context/CartProvider";
+import { useCart } from "../../context/ContextProvider";
 
 
 const ProductPage = () => {

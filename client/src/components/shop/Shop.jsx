@@ -5,7 +5,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import cart from "../../assets/shopping-bag.png"
-import { useCart } from "../../context/CartProvider";
+import { useCart } from "../../context/ContextProvider";
 
 
 const Shop = () => {
