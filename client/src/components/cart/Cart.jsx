@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useCart } from '../../context/CartProvider';
+import { useCart } from '../../context/ContextProvider';
 import "../../styles/cart/cart.css"
 import axios from 'axios';
 

@@ -1,10 +1,14 @@
 import React from 'react';
-import './wishlist.css';
+import '../../styles/wishlist/wishlist.css';
+import { useCart } from '../../context/ContextProvider';
 
 
 // wishlistItems, removeFromWishlist, addToCart
 
-const Wishlist = ({  }) => {
+const Wishlist = () => {
+
+  const {wishlistItems, removeFromWishlist, addToCart} = useCart();
+
   return (
     <div className="wishlist-container">
       <h2 className="wishlist-title">My Wishlist</h2>
@@ -14,8 +18,8 @@ const Wishlist = ({  }) => {
       ) : (
         <div className="wishlist-grid">
           {wishlistItems.map((item) => (
-            <div className="wishlist-card" key={item.id}>
-              <img src={item.image} alt={item.name} className="wishlist-image" />
+            <div className="wishlist-card" key={item._id}>
+              <img src={item.images[0].url ? `http://localhost:4000${item.images[0].url}` : ''} alt={item.name} className="wishlist-image" />
               <div className="wishlist-details">
                 <h3 className="wishlist-name">{item.name}</h3>
                 <p className="wishlist-price">${item.price}</p>
@@ -28,7 +32,7 @@ const Wishlist = ({  }) => {
                   </button>
                   <button 
                     className="wishlist-btn remove-btn" 
-                    onClick={() => removeFromWishlist(item.id)}
+                    onClick={() => removeFromWishlist(item._id)}
                   >
                     Remove
                   </button>

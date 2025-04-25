@@ -38,7 +38,7 @@ export const ContextProvider = ({children}) => {
         return storedWishlist ? JSON.parse(storedWishlist) : [];
         } catch (error) {
         console.error("Failed to parse wishlist from localStorage:", error);
-        return [];
+        //return [];
         }
     });
 
@@ -101,8 +101,9 @@ export const ContextProvider = ({children}) => {
     };
 
     //WishList
-    // 💖 Add to wishlist
+        // 💖 Add to wishlist
         const addToWishlist = (item) => {
+            console.log("Called");
             const exists = wishlistItems.some((i) => i._id === item._id);
             if (!exists) {
             setWishlistItems((prev) => [...prev, item]);
@@ -117,7 +118,7 @@ export const ContextProvider = ({children}) => {
 
     return (
         <CartContext.Provider 
-        value = {{cartItems, addToCart, removeFromCart, updateQuantity, addToWishlist, removeFromWishlist}}>
+        value = {{cartItems, addToCart, removeFromCart, updateQuantity, wishlistItems ,addToWishlist, removeFromWishlist}}>
             {children}
         </CartContext.Provider>
     );

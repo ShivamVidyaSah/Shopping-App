@@ -17,10 +17,17 @@ const ProductPage = () => {
     const [quantity, setQuantity] = useState(1);
     const [added, setAdded] = useState(false);
 
-    const { addToCart } = useCart();
+    const { addToCart, addToWishlist , removeFromWishlist } = useCart();
     
 
-    const toggleWishlist = () => {
+    const toggleWishlist = (e) => {
+        
+        if(!isWishlisted){
+            addToWishlist(product);
+        }else{
+            removeFromWishlist(product._id);
+        }
+
         setIsWishlisted(!isWishlisted);
     }
 
@@ -42,6 +49,11 @@ const ProductPage = () => {
         return () => clearTimeout(timeout);
       }, [added]);
       
+      useEffect(() => {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const exists = wishlist.some(item => item._id === product._id);
+        setIsWishlisted(exists);
+    }, [product]);  
 
     return (
         <div className="product-page-container">
@@ -56,7 +68,7 @@ const ProductPage = () => {
 
             {/* Only customer are allowed to add to wishlist */}
            { (role === "Customer")?
-            <div className="wishlist-button" onClick={toggleWishlist}>
+            <div className="wishlist-button" onClick={(e) => toggleWishlist(e)}>
             {isWishlisted ? "❤️" : "🤍"}
             </div>: null}
 

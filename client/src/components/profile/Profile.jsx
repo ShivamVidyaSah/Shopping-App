@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/profile.css";
 import profilePicture from "../../assets/profile-pic.png";
 import axios from "axios";
@@ -7,6 +7,7 @@ import AddProduct from "./admin/Addproduct.jsx";
 import  AllProducts  from "./admin/AllProducts.jsx";
 import Addcoupon from "./admin/Addcoupon.jsx";
 import AllCoupons from './admin/AllCoupon.jsx'
+import Wishlist from "../wishlist/Wishlist.jsx"
 
 
 
@@ -19,6 +20,8 @@ const Profile = () => {
     const [activeComponent, setActiveComponent] = useState("dashboard");
 
     const [profilePic, setProfilePic] = useState(null);
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
 
@@ -111,7 +114,8 @@ const Profile = () => {
                     <>
                         <li onClick={() => setActiveComponent("myorders")}>My Orders</li>
                         <li onClick={() => setActiveComponent("wishlist")}>Wishlist</li>
-                        <li onClick={() => setActiveComponent("cart")}>Cart</li>
+                        <li onClick={() => setActiveComponent("messages")}>Messages</li>
+                        <li onClick={() => navigate('/cart')}>Cart</li>
                         <li><Link to='/login'>Logout</Link></li>
                     </>
                     }
@@ -132,7 +136,7 @@ const Profile = () => {
                         {activeComponent === "coupon" && <AllCoupons/>}
                         {activeComponent === "orders" && <Orders />}
                         {activeComponent === "wishlist" && <Wishlist />}
-                        {activeComponent === "chat" && <Chat />}
+                        {/* {activeComponent === "chat" && navigate('/cart') } */}
                     </div>
                 )
             }
