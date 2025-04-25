@@ -14,7 +14,9 @@ export const useCart = () => useContext(CartContext);
 
 //We’re creating a component that will wrap around our entire app. 
 //This component will provide the cart data and logic to all its children (your app).
-export const CartProvider = ({children}) => {
+export const ContextProvider = ({children}) => {
+
+    //cart state
 
     const [cartItems, setCartItems] = useState(()=>{
         //let storedCart;
@@ -29,10 +31,26 @@ export const CartProvider = ({children}) => {
         }
     })
 
+    // 💖 WISHLIST STATE
+    const [wishlistItems, setWishlistItems] = useState(() => {
+        try {
+        const storedWishlist = localStorage.getItem("wishlist");
+        return storedWishlist ? JSON.parse(storedWishlist) : [];
+        } catch (error) {
+        console.error("Failed to parse wishlist from localStorage:", error);
+        return [];
+        }
+    });
+
     //whenever we update the cart, the localstorage must update the cart info
     useEffect(()=>{
         localStorage.setItem('cart', JSON.stringify(cartItems));
     },[cartItems]);
+
+    // Save wishlist to localStorage whenever wishlistItems change
+    useEffect(() => {
+        localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
+    }, [wishlistItems]);
 
 
     //the add to cart function
@@ -82,9 +100,24 @@ export const CartProvider = ({children}) => {
         );
     };
 
+    //WishList
+    // 💖 Add to wishlist
+        const addToWishlist = (item) => {
+            const exists = wishlistItems.some((i) => i._id === item._id);
+            if (!exists) {
+            setWishlistItems((prev) => [...prev, item]);
+            }
+        };
+
+        // 💔 Remove from wishlist
+        const removeFromWishlist = (id) => {
+            setWishlistItems((prev) => prev.filter((item) => item._id !== id));
+        };
+
+
     return (
         <CartContext.Provider 
-        value = {{cartItems, addToCart, removeFromCart, updateQuantity}}>
+        value = {{cartItems, addToCart, removeFromCart, updateQuantity, addToWishlist, removeFromWishlist}}>
             {children}
         </CartContext.Provider>
     );
