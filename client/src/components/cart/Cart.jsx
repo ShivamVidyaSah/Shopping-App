@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/ContextProvider';
 import "../../styles/cart/cart.css"
 import axios from 'axios';
@@ -10,7 +11,7 @@ const Cart = () => {
   const [coupon , setCoupon] = useState( {couponcode: ''}); // for storing code
   const [couponMessage, setCouponMessage] = useState(""); // for the message
 
-  
+  const navigate = useNavigate();
   const verifyCoupon = async() => {
    
       try{
@@ -38,6 +39,10 @@ const Cart = () => {
   totalPrice = totalPrice - ((totalPrice * appliedCoupon)/100);
 
   // console.log(totalPrice - appliedCoupon);
+
+  const toCheck = () => {
+      navigate('/checkout', {state : { amount: totalPrice}});
+  }
 
   return (
     <div className="cart-container">
@@ -111,7 +116,7 @@ const Cart = () => {
         <div className="cart-summary">
           <h4>Discount: {appliedCoupon}%</h4>
           <h3>Total: ₹{totalPrice}</h3>
-          <button className="cart-checkout">Proceed to Checkout</button>
+          <button className="cart-checkout" onClick={()=> toCheck()}>Proceed to Checkout</button>
         </div>
       )}
     </div>
