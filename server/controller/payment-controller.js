@@ -6,17 +6,27 @@ export const CreatePaymentIntent = async(req,res) => {
 
     try{
 
-        const {amount} = req.body;
+        const { amount, currency, shipping } = req.body;
+        const {name, address} = shipping;
 
-        const paymentIntent = await stripe.paymentIntents.create({
+          if (!amount || !currency || !shipping.name || !shipping.address) {
+            return res.status(400).json({ error: "Missing required fields" });
+            }
+
+            const paymentIntent = await stripe.paymentIntents.create({
             amount,
-            currency : "usd",
-            payment_method_types: ["card"]
-        });
+            currency,
+            payment_method_types: ["card"],
+            description: "E-commerce export payment",
+            shipping: {
+                name,
+                address,
+            },
+            });
 
-        res.send({
+            res.send({
             clientSecret: paymentIntent.client_secret,
-          });
+            });
 
     }catch(error){
         console.error("Stripe error:", error.message);

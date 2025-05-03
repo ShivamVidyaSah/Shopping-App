@@ -2,22 +2,23 @@
 import {useStripe, useElements , PaymentElement } from  '@stripe/react-stripe-js';
 import { useState } from 'react';
 
-const CheckOutForm = () => {
+const CheckOutForm = ({amount}) => {
 
     const stripe = useStripe();
-    const element = useElements();
+    const elements = useElements();
+    
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async(e) => {
 
         e.preventDefault();
 
-        if(!stripe || !element) return;
+        if(!stripe || !elements) return;
 
         setLoading(true);
 
         const { error } = await stripe.confirmPayment({
-        element,
+        elements,
         confirmParams: {
             return_url: "http://localhost:5173/success", // after payment
         },
@@ -37,13 +38,13 @@ const CheckOutForm = () => {
             information in your React app and place the Elements wherever 
             you want on your checkout page. You can also customize the appearance. */}
                 <button disabled={!stripe || loading} style={
-                    {marginTop:10, width:90, height:40, 
+                    {marginTop:10, width:"100%", height:40, 
                      border:"none" ,borderRadius:10,
                      backgroundColor: "#ff523b", color:"white",
                      cursor: "pointer"
                     }
                     }>
-                    {loading ? "Processing..." : "Pay Now"}
+                    {loading ? "Processing..." : `Pay ₹${amount}` }
                 </button>
 
         </form>
