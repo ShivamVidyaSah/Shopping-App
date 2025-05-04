@@ -1,7 +1,7 @@
 /* messaging.css */
 
 
-.messaging-container {
+.messagingContainer {
    
     display: flex;
     height: 90vh;
@@ -19,7 +19,7 @@
     overflow-y: auto;
   }
   
-  .user-entry {
+  .userEntry {
     padding: 10px;
     margin-bottom: 5px;
     background-color: white;
@@ -28,11 +28,11 @@
     transition: background 0.2s;
   }
   
-  .user-entry:hover {
+  .userEntry:hover {
     background-color: #e6e6e6;
   }
   
-  .user-entry.active {
+  .userEntry.active {
     background-color: #d0e6ff;
   }
   
@@ -41,7 +41,7 @@
     color: #666;
   }
   
-  .chat-area {
+  .chatArea {
     width: 75%;
     display: flex;
     flex-direction: column;
@@ -49,13 +49,7 @@
     position: relative;
   }
   
-  .chat-window {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  
-  .chat-header {
+  .chatHeader {
     padding: 15px;
     background-color: #075e54;
     color: white;
@@ -63,7 +57,7 @@
     font-size: 18px;
   }
   
-  .chat-body {
+  .chatBody {
     flex-grow: 1;
     padding: 15px;
     overflow-y: auto;
@@ -71,55 +65,9 @@
     flex-direction: column;
   }
   
-  .chat-input {
-    display: flex;
-    padding: 10px;
-    background-color: #f0f0f0;
-    align-items: center;
-  }
   
-  .chat-input input {
-    flex-grow: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-    margin-right: 10px;
-    outline: none;
-  }
-  
-  .chat-input button {
-    padding: 8px 16px;
-    background-color: #128c7e;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-  }
-  
-  .chat-input button:hover {
-    background-color: #075e54;
-  }
-  
-  .message-bubble {
-    max-width: 60%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    word-wrap: break-word;
-  }
-  
-  .message-bubble.user {
-    background-color: white;
-    align-self: flex-start;
-  }
-  
-  .message-bubble.admin {
-    background-color: #dcf8c6;
-    align-self: flex-end;
-  }
-  
-  .empty-chat {
-    /* margin: auto; */
+  .emptyChat {
+    margin: auto;
     color: #555;
     font-size: 18px;
   }
