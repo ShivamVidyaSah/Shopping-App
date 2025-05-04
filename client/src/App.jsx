@@ -3,7 +3,7 @@
 import Home from "./components/Home.jsx";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-import "./styles/global.css";
+import "./styles/base.css";
 import { ContextProvider } from "./context/ContextProvider.jsx";
 import Shop from "./components/shop/Shop.jsx";
 import Profile from "./components/profile/Profile.jsx";

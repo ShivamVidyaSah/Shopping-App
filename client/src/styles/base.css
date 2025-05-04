@@ -1,0 +1,54 @@
+/* base.css */
+
+/* 1. Basic Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Set a nice, clean font */
+body {
+  font-family: 'Poppins', 'Roboto', 'Helvetica', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+/* 3. Default link style */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 4. Images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 5. Button reset */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+/* 6. Global container for layout */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 7. Media queries for responsiveness */
+:root {
+  --small-screen: 600px;
+  --medium-screen: 768px;
+  --large-screen: 1024px;
+}

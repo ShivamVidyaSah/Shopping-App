@@ -5,7 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AddProduct from "./admin/Addproduct.jsx";
 import  AllProducts  from "./admin/AllProducts.jsx";
-import Addcoupon from "./admin/Addcoupon.jsx";
+import AdminInbox from "../messaging/adminMessages/AdminInbox.jsx";
 import AllCoupons from './admin/AllCoupon.jsx'
 import Wishlist from "../wishlist/Wishlist.jsx"
 
@@ -106,7 +106,7 @@ const Profile = () => {
                     <>
                         <li onClick={() => setActiveComponent("addProduct")}>Add Products</li>
                         <li onClick={() => setActiveComponent("allProducts")}>All Products</li>
-                        <li onClick={() => setActiveComponent("messages")}>Messages</li>
+                        <li onClick={() => setActiveComponent("admin-messages")}>Messages</li>
                         <li onClick={() => setActiveComponent("coupon")}>Coupons</li>
                         <li><Link to="/login">Logout</Link></li>
                     </>
@@ -114,7 +114,7 @@ const Profile = () => {
                     <>
                         <li onClick={() => setActiveComponent("myorders")}>My Orders</li>
                         <li onClick={() => setActiveComponent("wishlist")}>Wishlist</li>
-                        <li onClick={() => setActiveComponent("messages")}>Messages</li>
+                        <li onClick={() => setActiveComponent("user-messages")}>Messages</li>
                         <li onClick={() => navigate('/cart')}>Cart</li>
                         <li><Link to='/login'>Logout</Link></li>
                     </>
@@ -132,7 +132,8 @@ const Profile = () => {
                     <div className="main-content">
                         {activeComponent === "addProduct" && <AddProduct />}
                         {activeComponent === "allProducts" && <AllProducts />}
-                        {activeComponent === "messages" && <Messages />}
+                        {activeComponent === "admin-messages" && <AdminInbox />}
+                        {activeComponent === "user-messages" && <UserInbox/>}
                         {activeComponent === "coupon" && <AllCoupons/>}
                         {activeComponent === "orders" && <Orders />}
                         {activeComponent === "wishlist" && <Wishlist />}
