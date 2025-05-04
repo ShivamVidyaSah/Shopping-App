@@ -25,6 +25,7 @@ import {  getUserInfo, signUpUser, updateImg, userLogin } from "../controller/us
 import { AddProduct, deleteProduct, getAllProducts } from "../controller/product-controller.js";
 import { resetPassword, sendOTP, verifyOTP } from "../controller/password-controller.js";
 import { CreateCoupon, deleteCoupon, getAllCoupons, verifyCoupon } from "../controller/coupon-controller.js";
+import { CreatePaymentIntent } from "../controller/payment-controller.js";
 
 const router = express.Router();
 
@@ -55,6 +56,8 @@ router.get('/getcoupons', getAllCoupons);
 router.delete('/deletecoupon/:id', deleteCoupon );
 
 router.get('/verifycoupon', verifyCoupon)
+
+router.post('/create-payment-intent', CreatePaymentIntent);
 
 export default router;
 
