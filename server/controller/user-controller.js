@@ -73,7 +73,7 @@ export const userLogin = async(req,res) => {
                 const newToken = new Token({token: refreshToken});
                 await newToken.save();
 
-                return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken, name: user.name, username: user.username, role: user.role});
+                return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken, name: user.name, username: user.username, role: user.role, userId: user._id});
             }
 
         }catch(error){

@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import { useActionData } from "react-router-dom"
 
-const BillingDetailsForm = ({ amount , onPaymentReady}) => {
+const BillingDetailsForm = ({ payload , onPaymentReady}) => {
 
     const [form, setForm] = useState({
         name: "",
@@ -14,6 +14,8 @@ const BillingDetailsForm = ({ amount , onPaymentReady}) => {
     })
 
 const [loading, setLoading] = useState(false);
+
+console.log(payload);
 
 const handleChange = (e) => {
     setForm({ ...form , [e.target.name]: e.target.value})
@@ -30,11 +32,11 @@ const handleSubmit = async(e) => {
       }
 
     setLoading(true);
-      console.log(amount);
+     // console.log(amount);
     try{
 
         const res = await axios.post("http://localhost:4000/create-payment-intent", {
-            amount: amount, // in the smallest currency unit (like cents or paisa)
+            amount: payload.amount, // in the smallest currency unit (like cents or paisa)
             currency: form.currency,
             shipping: {
               name: form.name,
@@ -47,9 +49,27 @@ const handleSubmit = async(e) => {
             },
             description: "Test Payment from React App",
           });
-    
+          
+          const updatedPayload = {
+            ...payload,
+            shipping: {
+              name: form.name,
+              address: {
+                line1: form.line1,
+                city: form.city,
+                postal_code: form.postal_code,
+                country: form.country,
+              },
+            },
+            currency: form.currency,
+            description: "Test Payment from React App",
+            clientSecret: res.data.clientSecret,
+          };
+
+      //  const res = await axios.post("http://localhost:4000/create-payment-intent", {payload})
           // Pass clientSecret up to parent
           onPaymentReady(res.data.clientSecret);
+          payload(updatedPayload);
 
     }catch(error){
         console.error("Error creating payment intent:", error.message);

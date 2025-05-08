@@ -13,9 +13,12 @@ const CheckoutPage = () => {
 
 const location = useLocation();
 
- const [clientSecret, setClientSecret] = useState(null);
+const [clientSecret, setClientSecret] = useState(null);
 
-const amount = location.state?.amount;
+const payload = location.state?.payload;
+
+//const [finalPayload, setFinalPayload] = useState(payload);
+console.log(payload);
 
   const option = {
     clientSecret,
@@ -24,12 +27,14 @@ const amount = location.state?.amount;
 
   return (
     <div style={{ maxWidth: "500px", margin: "0 auto", padding: "1rem" }}>
+         {/* sending the payload to add more information to it */}
 
       {!clientSecret ? (
-        <BillingDetailsForm amount={amount} onPaymentReady={setClientSecret}/>
+        <BillingDetailsForm payload={payload} onPaymentReady={setClientSecret} /> 
       ) : (
         <Elements stripe={stripePromise} options={option}>
-          <CheckOutForm amount={amount}/>
+        {console.log({payload})}
+          <CheckOutForm payload={payload}/>
         </Elements>
       )}
     </div>

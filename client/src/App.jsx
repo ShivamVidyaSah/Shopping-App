@@ -13,6 +13,7 @@ import ResetPassword from "./components/passwordReset/resetPassword.jsx"
 import Cart from "./components/cart/Cart.jsx";
 import CheckoutPage from "./pages/CheckoutPage.jsx";
 import Success from "./pages/Success.jsx";
+import Failure from "./pages/Failure.jsx";
 
 
  const PrivateRoute = ({isAuthenticated, ...prop}) => {
@@ -86,12 +87,11 @@ function App() {
 
         </Route>
 
-        {/* <Route path='/failurepage' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
+        <Route path='/failure' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
 
-          <Route path='/failurepage' element={<FailurePage />}/>
+           <Route path='/failure' element={<Failure />}/>
 
-        </Route> */}
-
+        </Route>
 
           {/* <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />

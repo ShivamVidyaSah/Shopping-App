@@ -40,8 +40,27 @@ const Cart = () => {
 
   // console.log(totalPrice - appliedCoupon);
 
-  const toCheck = () => {
-      navigate('/checkout', {state : { amount: totalPrice}});
+  const toCheck = () => { 
+
+    const payload = {
+      amount: totalPrice,
+      totalBeforeDiscount: cartItems.reduce(
+        (acc, item) => Math.ceil(acc + item.finalPrice * item.quantity), 0),
+      cartItems: cartItems.map(item => ({
+        productId: item._id,
+        name: item.name,
+        quantity: item.quantity,
+        finalPrice: item.finalPrice,
+      })),
+      coupon: {
+        code: coupon.couponcode,
+        discount: appliedCoupon,
+      },
+      // If you later get userID from auth context/localStorage
+      userId: sessionStorage.getItem('userId')
+    };
+  
+      navigate('/checkout', {state : {payload}});
   }
 
   return (

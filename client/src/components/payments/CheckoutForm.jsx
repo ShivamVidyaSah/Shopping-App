@@ -2,7 +2,7 @@
 import {useStripe, useElements , PaymentElement } from  '@stripe/react-stripe-js';
 import { useState } from 'react';
 
-const CheckOutForm = ({amount}) => {
+const CheckOutForm = ({payload}) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -44,7 +44,7 @@ const CheckOutForm = ({amount}) => {
                      cursor: "pointer"
                     }
                     }>
-                    {loading ? "Processing..." : `Pay ₹${amount}` }
+                    {loading ? "Processing..." : `Pay ₹${payload.amount}` }
                 </button>
 
         </form>

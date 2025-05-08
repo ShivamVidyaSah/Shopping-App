@@ -81,6 +81,7 @@ const LoginPage = ({isUserAuthenticated}) => {
           sessionStorage.setItem('refreshToken' , `Bearer ${response.data.refreshToken}`);
           sessionStorage.setItem('userName',`${response.data.username}`);
           sessionStorage.setItem('role',`${response.data.role}`);
+          sessionStorage.setItem('userId',`${response.data.userId}`);
 
           //setAccount({username: response.data.username, name: response.data.name});
          
