@@ -32,7 +32,6 @@ const handleSubmit = async(e) => {
       }
 
     setLoading(true);
-     // console.log(amount);
     try{
 
         const res = await axios.post("http://localhost:4000/create-payment-intent", {
@@ -66,10 +65,9 @@ const handleSubmit = async(e) => {
             clientSecret: res.data.clientSecret,
           };
 
-      //  const res = await axios.post("http://localhost:4000/create-payment-intent", {payload})
           // Pass clientSecret up to parent
-          onPaymentReady(res.data.clientSecret);
-          payload(updatedPayload);
+          console.log(updatedPayload);
+          onPaymentReady(updatedPayload);
 
     }catch(error){
         console.error("Error creating payment intent:", error.message);

@@ -13,28 +13,24 @@ const CheckoutPage = () => {
 
 const location = useLocation();
 
-const [clientSecret, setClientSecret] = useState(null);
+const [updatedPayload, setUpdatedPayload] = useState(null);
 
 const payload = location.state?.payload;
-
-//const [finalPayload, setFinalPayload] = useState(payload);
-console.log(payload);
-
-  const option = {
-    clientSecret,
-    appearance: { theme: "flat" },
-  };
 
   return (
     <div style={{ maxWidth: "500px", margin: "0 auto", padding: "1rem" }}>
          {/* sending the payload to add more information to it */}
 
-      {!clientSecret ? (
-        <BillingDetailsForm payload={payload} onPaymentReady={setClientSecret} /> 
+        {/* first we are checking for updatedpayload. then we are checking for clientSecret */}
+      {!updatedPayload?.clientSecret ? (
+        <BillingDetailsForm payload={payload} onPaymentReady={setUpdatedPayload} /> 
       ) : (
-        <Elements stripe={stripePromise} options={option}>
-        {console.log({payload})}
-          <CheckOutForm payload={payload}/>
+        <Elements stripe={stripePromise} options={{
+            clientSecret: updatedPayload.clientSecret,
+            appearance: { theme: "flat" }
+          }}>
+       
+          <CheckOutForm payload={updatedPayload}/>
         </Elements>
       )}
     </div>
