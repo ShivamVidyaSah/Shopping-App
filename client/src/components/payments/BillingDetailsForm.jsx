@@ -1,6 +1,8 @@
 import { useState } from "react"
 import axios from "axios"
 import { useActionData } from "react-router-dom"
+import styles from '../../styles/checkout/BillingDetailsForm.module.css';
+
 
 const BillingDetailsForm = ({ payload , onPaymentReady}) => {
 
@@ -15,7 +17,7 @@ const BillingDetailsForm = ({ payload , onPaymentReady}) => {
 
 const [loading, setLoading] = useState(false);
 
-console.log(payload);
+//console.log(payload);
 
 const handleChange = (e) => {
     setForm({ ...form , [e.target.name]: e.target.value})
@@ -47,6 +49,8 @@ const handleSubmit = async(e) => {
               },
             },
             description: "Test Payment from React App",
+            cartItems: payload.cartItems, 
+
           });
           
           const updatedPayload = {
@@ -63,10 +67,12 @@ const handleSubmit = async(e) => {
             currency: form.currency,
             description: "Test Payment from React App",
             clientSecret: res.data.clientSecret,
+            orderId: res.data.orderId,
+            paymentIntentId: res.data.paymentIntentId
           };
 
           // Pass clientSecret up to parent
-          console.log(updatedPayload);
+          //console.log(updatedPayload);
           onPaymentReady(updatedPayload);
 
     }catch(error){
@@ -79,28 +85,30 @@ const handleSubmit = async(e) => {
 
 
     return(
-       <form onSubmit={handleSubmit}>
-            <h2>Billing Details</h2>
-            <input type="text" name="name" placeholder="Full Name" onChange={handleChange} />
-            <input type="text" name="line1" placeholder="Address Line 1" onChange={handleChange} />
-            <input type="text" name="city" placeholder="City" onChange={handleChange} />
-            <input type="text" name="postal_code" placeholder="Postal Code" onChange={handleChange} />
-            <select name="country" onChange={handleChange}>
-                <option value="IN">India</option>
-                <option value="US">United States</option>
-                <option value="GB">United Kingdom</option>
-                {/* add more if needed */}
-            </select>
-
-            <select name="currency" onChange={handleChange}>
-                <option value="usd">USD</option>
-                <option value="inr">INR</option>
-            </select>
-
-            <button type="submit" disabled={loading}>
-                {loading ? "Processing..." : "Proceed to Payment"}
-            </button>
-        </form>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <h2>Billing Details</h2>
+      <input className={styles.inputField} type="text" name="name" placeholder="Full Name" onChange={handleChange} />
+      <input className={styles.inputField} type="text" name="line1" placeholder="Address Line 1" onChange={handleChange} />
+      <input className={styles.inputField} type="text" name="city" placeholder="City" onChange={handleChange} />
+      <input className={styles.inputField} type="text" name="postal_code" placeholder="Postal Code" onChange={handleChange} />
+    
+      <div className={styles.selectRow}>
+        <select className={styles.selectField} name="country" onChange={handleChange}>
+          <option value="IN">India</option>
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+        </select>
+    
+        <select className={styles.selectField} name="currency" onChange={handleChange}>
+          <option value="usd">USD</option>
+          <option value="inr">INR</option>
+        </select>
+      </div>
+    
+      <button type="submit" disabled={loading} className={styles.submitButton}>
+        {loading ? "Processing..." : "Proceed to Payment"}
+      </button>
+    </form>
     )
 }
 

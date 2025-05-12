@@ -8,6 +8,7 @@ const CheckOutForm = ({payload}) => {
     const elements = useElements();
     
     const [loading, setLoading] = useState(false);
+    console.log(payload);
 
     const handleSubmit = async(e) => {
 
@@ -20,7 +21,7 @@ const CheckOutForm = ({payload}) => {
         const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-            return_url: "http://localhost:5173/success", // after payment
+            return_url: `http://localhost:5173/success?payment_intent=${payload.paymentIntentId}&order_id=${payload.orderId}`, // after payment
         },
         });
 
