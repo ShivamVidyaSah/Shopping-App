@@ -8,6 +8,7 @@ import  AllProducts  from "./admin/AllProducts.jsx";
 import AdminInbox from "../messaging/adminMessages/AdminInbox.jsx";
 import AllCoupons from './admin/AllCoupon.jsx'
 import Wishlist from "../wishlist/Wishlist.jsx"
+import OrdersTab from "./customer/MyOrders.jsx";
 
 
 
@@ -135,7 +136,7 @@ const Profile = () => {
                         {activeComponent === "admin-messages" && <AdminInbox />}
                         {activeComponent === "user-messages" && <UserInbox/>}
                         {activeComponent === "coupon" && <AllCoupons/>}
-                        {activeComponent === "orders" && <Orders />}
+                        {activeComponent === "orders" && <OrdersTab />}
                         {activeComponent === "wishlist" && <Wishlist />}
                         {/* {activeComponent === "chat" && navigate('/cart') } */}
                     </div>

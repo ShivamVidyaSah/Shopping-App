@@ -1,6 +1,6 @@
 // src/pages/Success.jsx
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 const Success = () => {
@@ -12,6 +12,12 @@ const Success = () => {
 
     const orderId = searchParams.get("order_id");
     const paymentIntentId = searchParams.get("payment_intent");
+    const navigate = useNavigate();
+
+    // const handleClick = (e) => {
+    //     e.preventDefault();
+    //     navigate("/shop");
+    // }
 
     useEffect(()=>{
 
@@ -58,6 +64,13 @@ const Success = () => {
         <p><strong>Order ID:</strong> {orderDetails._id}</p>
         <p><strong>Status:</strong> {orderDetails.status}</p>
         <p><strong>Shipping Name:</strong> {orderDetails.shipping.name}</p>
+        <button onClick={()=> navigate('/shop')} style={{
+          background: "#ff523b",
+          color: "white",
+          width:100,
+          height:40,
+          borderRadius: 10
+        }}>Back to Shop</button>
       </div>
     );
   };

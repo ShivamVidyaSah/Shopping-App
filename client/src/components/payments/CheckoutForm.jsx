@@ -8,8 +8,7 @@ const CheckOutForm = ({payload}) => {
     const elements = useElements();
     
     const [loading, setLoading] = useState(false);
-    console.log(payload);
-
+   
     const handleSubmit = async(e) => {
 
         e.preventDefault();

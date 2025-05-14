@@ -1,6 +1,5 @@
 import { useState } from "react"
 import axios from "axios"
-import { useActionData } from "react-router-dom"
 import styles from '../../styles/checkout/BillingDetailsForm.module.css';
 
 
@@ -16,8 +15,6 @@ const BillingDetailsForm = ({ payload , onPaymentReady}) => {
     })
 
 const [loading, setLoading] = useState(false);
-
-//console.log(payload);
 
 const handleChange = (e) => {
     setForm({ ...form , [e.target.name]: e.target.value})
@@ -39,6 +36,7 @@ const handleSubmit = async(e) => {
         const res = await axios.post("http://localhost:4000/create-payment-intent", {
             amount: payload.amount, // in the smallest currency unit (like cents or paisa)
             currency: form.currency,
+            userId: sessionStorage.getItem("userId"),
             shipping: {
               name: form.name,
               address: {
@@ -72,7 +70,6 @@ const handleSubmit = async(e) => {
           };
 
           // Pass clientSecret up to parent
-          //console.log(updatedPayload);
           onPaymentReady(updatedPayload);
 
     }catch(error){

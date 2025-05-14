@@ -38,6 +38,7 @@ export const CreatePaymentIntent = async(req,res) => {
                 amount,
                 currency,
                 shipping,
+                userId: req.body.userId,
                 items: req.body.cartItems,
                 paymentIntentId: paymentIntent.id,
                 status: "pending", // default but we set it explicitly
