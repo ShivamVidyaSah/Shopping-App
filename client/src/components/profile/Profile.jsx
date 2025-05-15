@@ -136,7 +136,7 @@ const Profile = () => {
                         {activeComponent === "admin-messages" && <AdminInbox />}
                         {activeComponent === "user-messages" && <UserInbox/>}
                         {activeComponent === "coupon" && <AllCoupons/>}
-                        {activeComponent === "orders" && <OrdersTab />}
+                        {activeComponent === "myorders" && <OrdersTab />}
                         {activeComponent === "wishlist" && <Wishlist />}
                         {/* {activeComponent === "chat" && navigate('/cart') } */}
                     </div>
