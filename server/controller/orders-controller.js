@@ -4,7 +4,7 @@ export const getAllOrders = async(req,res) => {
 
     try{
 
-        const allOrders = await Order.find({ userId : req.params.id});
+        const allOrders = await Order.find({ userId : req.params.id}).sort({createdAt: -1}); // sorting in descending order
         if(allOrders.length > 0){
             return res.status(200).json({allOrders});
         }else{

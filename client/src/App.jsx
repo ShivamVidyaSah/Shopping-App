@@ -14,6 +14,7 @@ import Cart from "./components/cart/Cart.jsx";
 import CheckoutPage from "./pages/CheckoutPage.jsx";
 import Success from "./pages/Success.jsx";
 import Failure from "./pages/Failure.jsx";
+import OrderDetails from "./components/orders/ordersDetails.jsx";
 
 
  const PrivateRoute = ({isAuthenticated, ...prop}) => {
@@ -90,6 +91,12 @@ function App() {
         <Route path='/failure' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
 
            <Route path='/failure' element={<Failure />}/>
+
+        </Route>
+
+        <Route path='/orders/:id' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
+
+           <Route path='/orders/:id' element={<OrderDetails />}/>
 
         </Route>
 
