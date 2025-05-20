@@ -16,3 +16,14 @@ export const getAllOrders = async(req,res) => {
     }
 
 }
+
+export const getSingleOrder = async(req,res) => {
+
+    try{
+        console.log(req);
+        const getorder = Order.findById({orderId : req})
+
+    }catch(error){
+
+    }
+}

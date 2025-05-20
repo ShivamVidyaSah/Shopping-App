@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
@@ -7,6 +7,23 @@ const OrderDetails = () => {
     const {orderId} = useParams();
     const [order, setOrders] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    useEffect(()=>{
+        const fetchOrder = async() => {
+
+          try{
+            const response = await axios.get(`http://localhost:4000/order/${orderId}`);
+            setOrders(response.data.order);
+          }catch(error){
+                    console.error("Error fetching order:", err);
+          }finally{
+            setLoading(false);
+          }
+
+        }
+
+        fetchOrder();
+    },[orderId]);
 
     return(
          <div className="order-details-container">
