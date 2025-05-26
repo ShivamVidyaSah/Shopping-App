@@ -50,6 +50,7 @@ const Cart = () => {
         productId: item._id,
         name: item.name,
         quantity: item.quantity,
+        price: item.price,
         finalPrice: item.finalPrice,
       })),
       coupon: {

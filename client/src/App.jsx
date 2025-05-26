@@ -94,9 +94,9 @@ function App() {
 
         </Route>
 
-        <Route path='/orders/:id' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
+        <Route path='/orders/:orderId' element={<PrivateRoute isAuthenticated={isAuthenticated}/>} >
 
-           <Route path='/orders/:id' element={<OrderDetails />}/>
+           <Route path='/orders/:orderId' element={<OrderDetails />}/>
 
         </Route>
 

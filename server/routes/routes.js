@@ -62,8 +62,9 @@ router.post('/create-payment-intent', CreatePaymentIntent);
 
 router.post('/confirm-payment', confirmPayment);
 
-router.get(`/orders/:id`, getAllOrders, getSingleOrder);
+router.get(`/orders/user/:id`, getAllOrders);
 
+router.get('/orders/:orderId', getSingleOrder);
 
 export default router;
 

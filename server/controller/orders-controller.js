@@ -20,10 +20,16 @@ export const getAllOrders = async(req,res) => {
 export const getSingleOrder = async(req,res) => {
 
     try{
-        console.log(req);
-        const getorder = Order.findById({orderId : req})
+        
+        const getorder = await Order.findById(req.params.orderId);
+
+        if(getorder){
+            return res.status(200).json({getorder})
+        }
+
+        return res.status(400).json({msg: "No orders found"});
 
     }catch(error){
-
+        return res.status(500).json({msg: "Error while fetching orders"});
     }
 }

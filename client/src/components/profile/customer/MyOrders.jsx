@@ -12,12 +12,11 @@ const OrdersTab = () => {
     const userId = sessionStorage.getItem("userId");
     const navigate = useNavigate();
 
-
     useEffect(()=>{
 
         const fetchOrders = async() => {
             try{
-                const response = await axios.get(`http://localhost:4000/orders/${userId}`);
+                const response = await axios.get(`http://localhost:4000/orders/user/${userId}`);
                 if(response.status === 200){
                 setOrders(response.data.allOrders);
                 }
