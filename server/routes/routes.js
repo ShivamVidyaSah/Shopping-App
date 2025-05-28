@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-import {  getUserInfo, signUpUser, updateImg, userLogin } from "../controller/user-controller.js";
+import {  getUserInfo, signUpUser, updateImg, updateUserInfo, userLogin } from "../controller/user-controller.js";
 import { AddProduct, deleteProduct, getAllProducts } from "../controller/product-controller.js";
 import { resetPassword, sendOTP, verifyOTP } from "../controller/password-controller.js";
 import { CreateCoupon, deleteCoupon, getAllCoupons, verifyCoupon } from "../controller/coupon-controller.js";
@@ -65,6 +65,8 @@ router.post('/confirm-payment', confirmPayment);
 router.get(`/orders/user/:id`, getAllOrders);
 
 router.get('/orders/:orderId', getSingleOrder);
+
+router.patch('/updateuserinfo', updateUserInfo);
 
 export default router;
 

@@ -19,9 +19,10 @@ const Profile = () => {
     const [ info, setInfo] = useState({});
     const [ showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
-        email: info.email,
-        contact: info.contact
+        email: "",
+        contact:""
     })
+    const [error, setError] = useState(false);
 
     const [activeComponent, setActiveComponent] = useState("dashboard");
 
@@ -89,7 +90,26 @@ const Profile = () => {
     };
 
     const handleSave = async() => {
+            try{
+                const response = await axios.patch(`http://localhost:4000/updateuserinfo`,{
+                    userId: info._id,
+                    email: form.email,
+                    contact: form.contact
+                });
 
+                if(response.status === 200){
+                    alert("Profile updated successfully!");
+                    setShowModal(false);
+                    setError(false);
+                    // Optionally, you can refresh the user info
+                    const updatedInfo = await axios.get(`http://localhost:4000/getinfo?username=${username}`);
+                    setInfo(updatedInfo.data);
+                }
+
+
+            }catch(error){
+                setError(true);
+            }
     }
     
     const url =  profilePicture;
@@ -142,6 +162,7 @@ const Profile = () => {
                             <button onClick={handleSave} className="saveButton">Save</button>
                             <button onClick={() => setShowModal(false)} className="cancelButton">Cancel</button>
                         </div>
+                        {error && <p className="error-message">Error updating profile. Please try again.</p>}
                     </div>
                 </div>
             )}

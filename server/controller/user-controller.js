@@ -119,3 +119,23 @@ export const updateImg = async(req,res) => {
     }
 }
 
+export const updateUserInfo = async(req,res)=> {
+
+    try{
+
+        const {userId, email,contact} = req.body;
+        const update = await User.findByIdAndUpdate(
+            userId,
+            {email: email,
+            contact: contact},
+            {new: true}
+        )
+
+        return res.status(200).json({msg: "User Info Updated", update});
+
+    }catch(error){
+        console.error("Error updating user info:", error);
+        return res.status(500).json({msg: "Server error while updating user info"});
+    }
+}
+
