@@ -17,6 +17,11 @@ const Profile = () => {
     const role = sessionStorage.getItem("role");
     const username = sessionStorage.getItem("userName");
     const [ info, setInfo] = useState({});
+    const [ showModal, setShowModal] = useState(false);
+    const [form, setForm] = useState({
+        email: info.email,
+        contact: info.contact
+    })
 
     const [activeComponent, setActiveComponent] = useState("dashboard");
 
@@ -77,28 +82,70 @@ const Profile = () => {
         }
 
         getInfo();
-    },[username])
+    },[username]);
+
+    const handleFormChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSave = async() => {
+
+    }
     
     const url =  profilePicture;
 
     return (
         <div className="profile-container">
-        <div className="profile-header">
-            <div className="profile-pic-container">
+            <div className="profile-header">
+                <div className="profile-pic-container">
+                    
+                        <img src= {info.images?.url ? `http://localhost:4000${info.images.url}` : url} alt="User Profile" className="profile-pic"/>
                 
-                    <img src= {info.images?.url ? `http://localhost:4000${info.images.url}` : url} alt="User Profile" className="profile-pic"/>
-            
-                <input type="file" id="change-pic" style={{display:"none"}} onChange={handleChange} accept="images/*"/>
-                <label className="change-pic-label" htmlFor="change-pic" style={{cursor:"pointer"}}>✏️</label>
+                    <input type="file" id="change-pic" style={{display:"none"}} onChange={handleChange} accept="images/*"/>
+                    <label className="change-pic-label" htmlFor="change-pic" style={{cursor:"pointer"}}>✏️</label>
+                </div>
+                <div className="profile-info">
+                    <h2 id="user-name">{info.username}</h2>
+                    <p id="user-email">{info.email}</p>
+                    <p id="user-role">Role: {info.role}</p>
+                    <p id="user-contact">Contact: {info.contact}</p>
+                </div>
+                <button className="edit-profile" onClick={()=> setShowModal(true)}>✏️</button>
             </div>
-            <div className="profile-info">
-                <h2 id="user-name">{info.username}</h2>
-                <p id="user-email">{info.email}</p>
-                <p id="user-role">Role: {info.role}</p>
-                <p id="user-contact">Contact: {info.contact}</p>
-            </div>
-            <button className="edit-profile">✏️</button>
-        </div>
+
+            {showModal && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <h2>Edit Profile</h2>
+                        {/* <input
+                            name="username"
+                            value={form.username}
+                            onChange={handleFormChange}
+                            placeholder="Username"
+                            className={styles.inputField}
+                        /> */}
+                        <input
+                            name="email"
+                            value={form.email}
+                            onChange={handleFormChange}
+                            placeholder="Email"
+                            className="email-inputField"
+                        />
+                        <input
+                            name="contact"
+                            value={form.contact}
+                            onChange={handleFormChange}
+                            placeholder="Contact"
+                            className="contact-inputField"
+                        />
+                        <div className="buttonGroup">
+                            <button onClick={handleSave} className="saveButton">Save</button>
+                            <button onClick={() => setShowModal(false)} className="cancelButton">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
 
         <div className="profile-content">
             <div className="sidebar">

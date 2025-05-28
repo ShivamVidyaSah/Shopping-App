@@ -65,7 +65,7 @@ const OrderDetails = () => {
         <h4>Payment Summary</h4>
         <p><strong>Amount Paid:</strong> ${order.amount }</p>
         <p><strong>Coupon Applied:</strong> {order.coupon?.code || "None"}</p>
-        <p><strong>Discount:</strong> {order.coupon ? `${order.coupon.discount}%` : "0%"}</p>
+        <p><strong>Coupon Discount:</strong> {order.coupon ? `${order.coupon.discount}%` : "0%"}</p>
         {/* <p><strong>Payment Method:</strong> {order.payment.method}</p> */}
         <p><strong>Payment Status:</strong> {order.status}</p>
         <p><strong>Ordered On:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
