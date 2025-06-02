@@ -20,6 +20,33 @@ const Home = () => {
         <p>Save more with coupons & up to 70% off!</p>
         <button onClick={()=> navigate('/shop')}>Shop Now</button>
       </section>
+
+      <section id="feature" className="section-p1">
+        <div className="fe-box">
+            <img className="fe-img" src="/icon-assets/free-shipping.webp"  alt="free-shipping"/>
+            <h6 className="fe-tagline">Free Shipping</h6>
+        </div>
+        <div className="fe-box">
+            <img className="fe-img" src="/icon-assets/online-order.png"  alt="free-shipping"/>
+            <h6 className="fe-tagline">Online Order</h6>
+        </div>
+        <div className="fe-box">
+            <img className="fe-img" src="/icon-assets/save-money.png" alt="free-shipping"/>
+            <h6 className="fe-tagline">Save Money</h6>
+        </div>
+        <div className="fe-box">
+            <img className="fe-img" src="/icon-assets/promo.png"  alt="free-shipping"/>
+            <h6 className="fe-tagline">Promotions</h6>
+        </div>
+        <div className="fe-box">
+            <img className="fe-img" src="/icon-assets/happy-cus.webp" alt="free-shipping"/>
+            <h6 className="fe-tagline">Happy Sell</h6>
+        </div>
+        <div className="fe-box">
+            <img className="fe-img" src="/icon-assets/service2.jpg" alt="free-shipping"/>
+            <h6 className="fe-tagline">F24/7 Support</h6>
+        </div>
+    </section>
       
       {/* Featured Products */}
       <section id="product1">

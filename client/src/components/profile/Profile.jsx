@@ -126,7 +126,7 @@ const Profile = () => {
                 </div>
                 <div className="profile-info">
                     <h2 id="user-name">{info.username}</h2>
-                    <p id="user-email">{info.email}</p>
+                    <p id="user-email">Email: {info.email}</p>
                     <p id="user-role">Role: {info.role}</p>
                     <p id="user-contact">Contact: {info.contact}</p>
                 </div>

@@ -122,12 +122,21 @@ export const updateImg = async(req,res) => {
 export const updateUserInfo = async(req,res)=> {
 
     try{
-
         const {userId, email,contact} = req.body;
+
+        // Build the update object dynamically
+        const updateFields = {};
+        if (email) updateFields.email = email;
+        if (contact) updateFields.contact = contact;
+
+        // Check if there's anything to update
+        if (Object.keys(updateFields).length === 0) {
+        return res.status(400).json({ msg: "No valid fields provided to update" });
+        }
+
         const update = await User.findByIdAndUpdate(
             userId,
-            {email: email,
-            contact: contact},
+            updateFields,
             {new: true}
         )
 
