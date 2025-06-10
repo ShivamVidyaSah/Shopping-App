@@ -83,6 +83,10 @@
     background-color: #acadac;
 }
 
+#product1 {
+    text-align: center;
+    padding: 40px 80px;
+}
 
 #banner{
     display: flex;
@@ -90,7 +94,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image:url("img/banner2.jpg") ;
+    background-image:url("/img-assets/banner2.jpg") ;
     width: 100%;
     height: 40vh;
     background-size: cover;
@@ -119,6 +123,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    padding: 40px 80px;
 
 }
 #sm-banner .banner-box{
@@ -126,8 +131,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-image:url("img/sm-banner6.jpg") ;
-    min-width: 540px;
+    background-image:url("/img-assets/sm-banner6.jpg") ;
+    min-width: 640px;
     height: 50vh;
     background-size: cover;
     background-position: center;
@@ -140,7 +145,7 @@
     justify-content: center;
     align-items: flex-start; */
 
-    background-image:url("img/sm-banner5.jpg") ;
+    background-image:url("/img-assets/sm-banner5.jpg") ;
     /* min-width: 540px;
     height: 50vh;
     background-size: cover;
@@ -187,7 +192,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-image:url("img/trending4.jpg") ;
+    background-image:url("/img-assets/trending4.jpg") ;
     min-width: 30%;
     height: 30vh;
     background-size: cover;
@@ -197,13 +202,13 @@
     border-radius: 10px;
 }
 #banner3 .banner-box2{
-    background-image: url("img/wedding-col1.jpg");
+    background-image: url("/img-assets/wedding-col1.jpg");
 }
 #banner3 .banner-box2 h3{
     color: #ffffff;
 }
 #banner3 .banner-box3{
-    background-image: url("img/retro2.jpg");
+    background-image: url("/img-assets/retro2.jpg");
 }
 #banner3 .banner-box3 h2{
     color: rgb(255, 255, 255);
@@ -233,6 +238,8 @@
     /* background-repeat: no-repeat;
     back*/
     background-position: 20% 30%;
+    margin: 40px 0;
+    padding: 40px 80px;
 } 
 #newletter h4{
     font-size: 22px;

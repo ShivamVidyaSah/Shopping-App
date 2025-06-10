@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../styles/login.css";
-import logo2 from "../assets/logo2.png"
+import logo2 from "../../public/img-assets/logo2.png"
 import axios from "axios";
 
 //import { DataContext } from "../context/DataProvider.jsx";
