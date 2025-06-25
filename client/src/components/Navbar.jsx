@@ -25,7 +25,7 @@ const Navbar = () => {
             <li><Link to="/shop">Shop</Link></li>
             {/* <li><a href="blog.html">Blog</a></li> */}
             <li><Link to="about.html">About</Link></li>
-            <li><Link to="contact.html">Contact</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
             {/* <li><a href="/login">Logout</a></li> */}
             <li><Link to="/profile"><img src={profile}
             style={{width: 30, textDecoration: "none"}}/></Link></li>

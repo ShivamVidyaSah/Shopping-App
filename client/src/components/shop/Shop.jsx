@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/shop.css";
-import heroImage from "../../assets/shop-page-banner.jpg";
+import heroImage from "../../../public/img-assets/shop-page-banner.jpg";
 import { useState,useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
