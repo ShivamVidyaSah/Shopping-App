@@ -16,6 +16,7 @@ import Success from "./pages/Success.jsx";
 import Failure from "./pages/Failure.jsx";
 import OrderDetails from "./components/orders/ordersDetails.jsx";
 import Contact from "./components/contact/contact.jsx";
+import Footer from "./components/footer/Footer.jsx";
 
 
  const PrivateRoute = ({isAuthenticated, ...prop}) => {
@@ -25,6 +26,8 @@ import Contact from "./components/contact/contact.jsx";
           <Navbar/>
 
           <Outlet/>
+          <Footer/>
+          
         </>):(
          <Navigate replace to='/login'/>
         );
@@ -114,6 +117,7 @@ function App() {
         
         </Routes>
         {/* <Footer /> */}
+        
       </BrowserRouter>
     </ContextProvider>
   

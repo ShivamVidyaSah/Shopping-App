@@ -1,5 +1,6 @@
 // This file will create a context provider for the cart
 
+import axios from "axios";
 import { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
@@ -45,6 +46,16 @@ export const ContextProvider = ({children}) => {
     //whenever we update the cart, the localstorage must update the cart info
     useEffect(()=>{
         localStorage.setItem('cart', JSON.stringify(cartItems));
+
+        try{
+
+            const  response = axios.post('http://localhost:4000/cart', {
+                
+            })
+
+        }catch (error) {
+            console.error("Failed to save cart to localStorage:", error);
+        }
     },[cartItems]);
 
     // Save wishlist to localStorage whenever wishlistItems change

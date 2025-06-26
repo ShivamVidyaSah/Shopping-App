@@ -55,4 +55,25 @@
 
 .newsletter{
     padding: 40px 80px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #fef9ea;
+    background-position: 20% 30%;
+}
+
+.newsletter h4{
+    font-size: 22px;
+    font-weight: 700;
+    color: rgb(243, 175, 17);
+}
+
+.newsletter p span{
+    color: rgb(243, 175, 17);
+}
+
+.newsletter .form{
+    display: flex;
+    width: 40%;
 }
