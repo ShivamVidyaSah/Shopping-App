@@ -27,6 +27,7 @@ import { resetPassword, sendOTP, verifyOTP } from "../controller/password-contro
 import { CreateCoupon, deleteCoupon, getAllCoupons, verifyCoupon } from "../controller/coupon-controller.js";
 import { confirmPayment, CreatePaymentIntent } from "../controller/payment-controller.js";
 import { getAllOrders, getSingleOrder } from "../controller/orders-controller.js";
+import { sendMessage } from "../controller/message-controller.js";
 
 const router = express.Router();
 
@@ -67,6 +68,8 @@ router.get(`/orders/user/:id`, getAllOrders);
 router.get('/orders/:orderId', getSingleOrder);
 
 router.patch('/updateuserinfo', updateUserInfo);
+
+router.post('/contactmessage', sendMessage)
 
 export default router;
 

@@ -1,6 +1,60 @@
+import { useState } from 'react';
 import styles from '../../styles/contact/contact.module.css';
+import axios from 'axios';
+
+
+const messageInitial = {
+    name:'',
+    email:"",
+    subject:"",
+    message:"",
+    userId:"",
+    role:"",
+}
 
 const Contact = () => {
+
+    const [message, setMessage] = useState(messageInitial);
+    const [messageSent, setMessageSent] = useState(null); //null| success | error 
+    // storing the message status
+    
+
+    const handleChange = (e) => {
+       setMessage({...message, [e.target.name]: e.target.value});
+    }
+
+    message. userId = sessionStorage.getItem('userId') || null;
+    message.role = sessionStorage.getItem('role') || null;
+
+    const sendMessage = async (e) => {
+        e.preventDefault();
+
+        console.log("submitted");
+
+        if (!message.name || !message.email || !message.subject || !message.message) {
+            alert("Please fill in all fields.");
+            return;
+        }
+        try{
+            const response = await axios.post('http://localhost:4000/contactmessage', message);
+            if(response.status === 200) {
+                setMessageSent('success');
+                setMessage(messageInitial); // Reset the form
+            }else{
+                setMessageSent('error');
+            }
+
+            setTimeout(() => {
+                setMessageSent(null); // Reset after showing message
+
+            }, 30000000); // Reset after 3 seconds
+        }catch (error) {
+                console.error("Error sending message:", error);
+                setMessageSent('error');
+            }
+    }
+
+
     return (
         <div>
             <section className={styles.aboutHeader}>
@@ -54,21 +108,19 @@ const Contact = () => {
                 <form action="">
                     <span>Leave a message</span>
                     <h2>We love to hear from you!</h2>
-                    <input type="text" placeholder="Name" />
-                    <input type="text" placeholder="E-mail" />
-                    <input type="text" placeholder="Subject" />
-                    <textarea cols="30" rows="10" placeholder="Your Message"></textarea>
-                    <button className={styles.normal}>Submit</button>
+                    <input type="text" placeholder="Name" name="name" onChange={handleChange}/>
+                    <input type="text" placeholder="E-Mail" name="email" onChange={handleChange}/>
+                    <input type="text" placeholder="Subject"  name="subject"onChange={handleChange}/>
+                    <textarea cols="30" rows="10" placeholder="Your Message" name="message" onChange={handleChange}></textarea>
+                    <button className={styles.normal} onClick={sendMessage}>Submit</button>
+                    { messageSent === 'success' && (
+                        <p className={styles.successMessage}>Message sent successfully!</p>
+                    )}
+                    { messageSent === 'error' && (
+                        <p className={styles.errorMessage}>Failed to send message. Please try again.</p>
+                    )}
                 </form>
 
-                {/* <div className={styles.people}>
-                    <div>
-                        <img src="people/blank-profile.png" alt="" />
-                        <p>
-                            <span>Shivam Vidya Sah</span> Phone :- +91 9903759222 <br /> Email :- sahahivam10@gmail.com
-                        </p>
-                    </div>
-                </div> */}
             </section>
 
             <section className={styles.newsletter }>
@@ -79,7 +131,7 @@ const Contact = () => {
                     </p>
                 </div>
                 <div className={styles.form}>
-                    <input type="text" placeholder="Your email address" />
+                    <input className={styles.emailInput} type="text" placeholder="Your email address" />
                     <button className={styles.normal}>Sign Up</button>
                 </div>
             </section>
