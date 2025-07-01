@@ -120,7 +120,7 @@ const Contact = () => {
                         <p className={styles.errorMessage}>Failed to send message. Please try again.</p>
                     )}
                 </form>
-
+ 
             </section>
 
             <section className={styles.newsletter }>

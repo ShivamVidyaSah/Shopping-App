@@ -9,6 +9,7 @@ import AdminInbox from "../messaging/adminMessages/AdminInbox.jsx";
 import AllCoupons from './admin/AllCoupon.jsx'
 import Wishlist from "../wishlist/Wishlist.jsx"
 import OrdersTab from "./customer/MyOrders.jsx";
+import Queries from "../queries/queries.jsx";
 
 
 
@@ -176,6 +177,7 @@ const Profile = () => {
                         <li onClick={() => setActiveComponent("addProduct")}>Add Products</li>
                         <li onClick={() => setActiveComponent("allProducts")}>All Products</li>
                         <li onClick={() => setActiveComponent("admin-messages")}>Messages</li>
+                        <li onClick={() => setActiveComponent("queries")}>Queries</li>
                         <li onClick={() => setActiveComponent("coupon")}>Coupons</li>
                         <li><Link to="/login">Logout</Link></li>
                     </>
@@ -205,6 +207,7 @@ const Profile = () => {
                         {activeComponent === "user-messages" && <UserInbox/>}
                         {activeComponent === "coupon" && <AllCoupons/>}
                         {activeComponent === "myorders" && <OrdersTab />}
+                        {activeComponent === "queries" && <Queries />}
                         {activeComponent === "wishlist" && <Wishlist />}
                         {/* {activeComponent === "chat" && navigate('/cart') } */}
                     </div>

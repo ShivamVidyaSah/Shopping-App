@@ -3,10 +3,13 @@ import { useState } from "react";
 import styles from "../../../styles/messaging/AdminMessage.module.css";
 import ChatWindow from "./ChatWindow"; //(You can uncomment when ready)
 
+
+// { id: 1, name: "Alice", lastMessage: "Hey there!" },
+//   { id: 2, name: "Bob", lastMessage: "Need help with order..." },
+//   { id: 3, name: "Charlie", lastMessage: "Thanks for the support!" },
+
 const dummyUsers = [
-  { id: 1, name: "Alice", lastMessage: "Hey there!" },
-  { id: 2, name: "Bob", lastMessage: "Need help with order..." },
-  { id: 3, name: "Charlie", lastMessage: "Thanks for the support!" },
+  
 ];
 
 const AdminInbox = () => {
